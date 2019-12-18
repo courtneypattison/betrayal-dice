@@ -1,4 +1,4 @@
-package com.courtneypattison.betryaldice
+package com.courtneypattison.betrayaldice
 
 import org.junit.Test
 
