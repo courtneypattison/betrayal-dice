@@ -1,8 +1,10 @@
 package com.courtneypattison.betrayaldice
 
+import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import kotlin.random.Random
@@ -11,11 +13,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var omenCardCount = 0
+    private lateinit var selectorImageViews: Array<ImageView>
+    private var selectorYs = arrayOf(0f, 0f)
     private var selectedButtons = arrayOfNulls<View>(2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        this.selectorImageViews = arrayOf(player0SelectorImageView, player1SelectorImageView)
     }
 
     // onClick Functions
@@ -27,8 +33,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newGame(view: View) {
-        styleAsUnselectedButton(this.selectedButtons[0])
-        styleAsUnselectedButton(this.selectedButtons[1])
+        moveSelector(selectorImageViews[0], 0)
+        moveSelector(selectorImageViews[1], 1)
 
         this.omenCardCount = 0
         this.selectedButtons = arrayOfNulls(2)
@@ -82,17 +88,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun highlightButton(view: View) {
         val playerNumber = getPlayerNumber(view)
-        styleAsUnselectedButton(this.selectedButtons[playerNumber])
         this.selectedButtons[playerNumber] = view
-        styleAsSelectedButton(view)
+        moveSelector(view, playerNumber)
     }
 
-    private fun styleAsUnselectedButton(view: View?) {
-        if (view != null) DrawableCompat.setTint(view.background, getColor(R.color.colorPrimary))
-    }
+    private fun moveSelector(view: View, playerNumber: Int) {
+        if (this.selectorYs[playerNumber] == 0f) this.selectorYs[playerNumber] = selectorImageViews[playerNumber].y
+        val difference = view.y - this.selectorYs[playerNumber]
 
-    private fun styleAsSelectedButton(view: View) {
-        DrawableCompat.setTint(view.background, getColor(R.color.colorAccent))
+        ObjectAnimator.ofFloat(selectorImageViews[playerNumber], "translationY", difference).apply {
+            duration = 2000
+                start()
+        }
     }
 
     private fun rollDie(): Int {
