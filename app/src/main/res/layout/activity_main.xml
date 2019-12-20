@@ -282,49 +282,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:textColor="#FF1744"
+        android:textColor="@color/colorWarn"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/player1DamageTextView"
         app:layout_constraintStart_toEndOf="@+id/player0DamageTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/hauntRollButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="hauntRoll"
-        android:text="@string/haunt_roll"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/player1Die1Button"
-        app:layout_constraintStart_toEndOf="@+id/player0Die1Button"
-        app:layout_constraintTop_toTopOf="@+id/player0Die1Button" />
-
-    <TextView
-        android:id="@+id/omenCardCountLabelTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:text="@string/omen_card_count_label"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/hauntRollButton"
-        app:layout_constraintStart_toStartOf="@+id/hauntRollButton"
-        app:layout_constraintTop_toBottomOf="@+id/hauntRollButton" />
-
-    <TextView
-        android:id="@+id/omenCardCountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:text="@string/omen_card_count"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/omenCardCountLabelTextView"
-        app:layout_constraintStart_toStartOf="@+id/omenCardCountLabelTextView"
-        app:layout_constraintTop_toBottomOf="@+id/omenCardCountLabelTextView" />
 
     <TextView
         android:id="@+id/player0DamageTextView"
@@ -384,6 +347,38 @@
         app:layout_constraintStart_toStartOf="@+id/player1Die1Button"
         app:layout_constraintTop_toTopOf="@+id/player1Die1Button"
         app:srcCompat="@drawable/ic_selector" />
+
+    <RelativeLayout
+        android:layout_width="144dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/player1Die3Button"
+        app:layout_constraintStart_toEndOf="@+id/player0Die3Button"
+        app:layout_constraintTop_toBottomOf="@+id/playerTieTextView">
+
+        <ImageButton
+            android:id="@+id/hauntRollButton"
+            style="@android:style/Widget.Material.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="52dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:onClick="hauntRoll"
+            android:theme="@style/AppTheme.Ripple"
+            app:srcCompat="@drawable/ic_crow" />
+
+        <TextView
+            android:id="@+id/omenCardCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/piedra"
+            android:text="@string/omen_card_count"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

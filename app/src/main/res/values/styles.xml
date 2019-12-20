@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Ripple">
+        <item name="colorControlHighlight">@color/colorPrimaryFocused</item>
+    </style>
+
 </resources>
