@@ -1,14 +1,13 @@
 package com.courtneypattison.betrayaldice
 
 import android.animation.ObjectAnimator
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.DrawableCompat
-import kotlin.random.Random
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         player0SumTextView.text = getString(R.string.zero)
         player1SumTextView.text = getString(R.string.zero)
 
-        omenCardCountLabelTextView.text = getString(R.string.omen_card_count_label)
         omenCardCountTextView.text = this.omenCardCount.toString()
 
         show(hauntRollButton)
@@ -83,7 +81,6 @@ class MainActivity : AppCompatActivity() {
     private fun beginHaunt() {
         hide(hauntRollButton)
         hide(omenCardCountTextView)
-        omenCardCountLabelTextView.text = getString(R.string.haunt)
     }
 
     private fun highlightButton(view: View) {
