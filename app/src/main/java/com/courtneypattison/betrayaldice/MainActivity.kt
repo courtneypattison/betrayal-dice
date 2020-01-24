@@ -3,6 +3,7 @@ package com.courtneypattison.betrayaldice
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,15 +12,31 @@ import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+    private var isHaunt = false
     private var omenCardCount = 0
+    private lateinit var player1Views: Array<View>
+    private lateinit var selectedDieCountButtons: Array<Button>
     private lateinit var selectorImageViews: Array<ImageView>
     private var selectorYs = arrayOf(0f, 0f)
-    private var selectedButtons = arrayOfNulls<View>(2)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        this.player1Views = arrayOf(
+            player1SumTextView,
+            player1SelectorImageView,
+            player1Die1Button,
+            player1Die2Button,
+            player1Die3Button,
+            player1Die4Button,
+            player1Die5Button,
+            player1Die6Button,
+            player1Die7Button,
+            player1Die8Button
+        )
+        this.selectedDieCountButtons = arrayOf(player0Die1Button, player1Die1Button)
         this.selectorImageViews = arrayOf(player0SelectorImageView, player1SelectorImageView)
     }
 
@@ -32,11 +49,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newGame(view: View) {
-        moveSelector(selectorImageViews[0], 0)
-        moveSelector(selectorImageViews[1], 1)
+        moveSelector(player0Die1Button, 0)
+        moveSelector(player1Die1Button, 1)
 
+        this.isHaunt = false
         this.omenCardCount = 0
-        this.selectedButtons = arrayOfNulls(2)
+        this.selectedDieCountButtons = arrayOf(player0Die1Button, player1Die1Button)
+
+        for (player1View in this.player1Views) hide(player1View)
 
         hideDamage()
 
@@ -50,9 +70,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rollDice(view: View) {
-        highlightButton(view)
-        setPlayerScore(getPlayerNumber(view), rollNDice(getDieCount(view)))
-        updateDamage()
+        setPlayerScore(0, rollNDice(getDieCount(selectedDieCountButtons[0])))
+
+        if (this.isHaunt) {
+            setPlayerScore(1, rollNDice(getDieCount(selectedDieCountButtons[1])))
+            updateDamage()
+        }
+    }
+
+    fun selectNDice(view: View) {
+        val playerNumber = getPlayerNumber(view)
+        this.selectedDieCountButtons[playerNumber] = view as Button
+        moveSelector(view, playerNumber)
     }
 
 //    Private functions
@@ -79,23 +108,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun beginHaunt() {
+        this.isHaunt = true
         hide(hauntRollButton)
         hide(omenCardCountTextView)
+
+        for (player1View in this.player1Views) fadeIn(player1View)
+        fadeIn(hauntBeginsTextView)
+        fadeOut(hauntBeginsTextView, 5000)
     }
 
-    private fun highlightButton(view: View) {
-        val playerNumber = getPlayerNumber(view)
-        this.selectedButtons[playerNumber] = view
-        moveSelector(view, playerNumber)
+    private fun fadeIn(view: View) {
+        show(view)
+        ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).apply {
+            duration = 1000
+            start()
+        }
+    }
+
+    private fun fadeOut(view: View, delay: Long) {
+        ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
+            duration = 1000
+            startDelay = delay
+            start()
+        }
     }
 
     private fun moveSelector(view: View, playerNumber: Int) {
-        if (this.selectorYs[playerNumber] == 0f) this.selectorYs[playerNumber] = selectorImageViews[playerNumber].y
+        if (this.selectorYs[playerNumber] == 0f) this.selectorYs[playerNumber] = selectorImageViews[playerNumber].y + 7f
         val difference = view.y - this.selectorYs[playerNumber]
 
         ObjectAnimator.ofFloat(selectorImageViews[playerNumber], "translationY", difference).apply {
-            duration = 2000
-                start()
+            duration = 1000
+            start()
         }
     }
 

@@ -13,15 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 1"
         android:text="@string/one"
         android:textSize="24sp"
         app:iconPadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0SumTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
 
     <Button
         android:id="@+id/player0Die2Button"
@@ -31,7 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 2"
         android:text="@string/two"
         android:textSize="24sp"
@@ -46,7 +45,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 3"
         android:text="@string/three"
         android:textSize="24sp"
@@ -61,7 +60,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 4"
         android:text="@string/four"
         android:textSize="24sp"
@@ -76,7 +75,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 5"
         android:text="@string/five"
         android:textSize="24sp"
@@ -91,7 +90,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 6"
         android:text="@string/six"
         android:textSize="24sp"
@@ -106,7 +105,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 7"
         android:text="@string/seven"
         android:textSize="24sp"
@@ -121,7 +120,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="0 8"
         android:text="@string/eight"
         android:textSize="24sp"
@@ -145,15 +144,15 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 1"
         android:text="@string/one"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1SumTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
 
     <Button
         android:id="@+id/player1Die2Button"
@@ -163,10 +162,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 2"
         android:text="@string/two"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die1Button" />
 
@@ -179,10 +179,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 3"
         android:text="@string/three"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die2Button" />
 
@@ -194,10 +195,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 4"
         android:text="@string/four"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die3Button" />
 
@@ -209,10 +211,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 5"
         android:text="@string/five"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die4Button" />
 
@@ -224,10 +227,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 6"
         android:text="@string/six"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die5Button" />
 
@@ -239,10 +243,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 7"
         android:text="@string/seven"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die6Button" />
 
@@ -254,10 +259,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="selectNDice"
         android:tag="1 8"
         android:text="@string/eight"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Die7Button" />
 
@@ -270,6 +276,7 @@
         android:gravity="center"
         android:text="@string/zero"
         android:textSize="36sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/player1Die1Button"
         app:layout_constraintStart_toStartOf="@+id/player1Die1Button"
         app:layout_constraintTop_toTopOf="parent" />
@@ -314,7 +321,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/newGameButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -332,30 +340,40 @@
         android:id="@+id/player0SelectorImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/player0Die3Button"
-        app:layout_constraintEnd_toEndOf="@+id/player0Die3Button"
-        app:layout_constraintStart_toStartOf="@+id/player0Die3Button"
-        app:layout_constraintTop_toTopOf="@+id/player0Die3Button"
+        app:layout_constraintBottom_toBottomOf="@+id/player0Die1Button"
+        app:layout_constraintEnd_toEndOf="@+id/player0Die1Button"
+        app:layout_constraintStart_toStartOf="@+id/player0Die1Button"
+        app:layout_constraintTop_toTopOf="@+id/player0Die1Button"
         app:srcCompat="@drawable/ic_selector" />
 
     <ImageView
         android:id="@+id/player1SelectorImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/player1Die1Button"
         app:layout_constraintEnd_toEndOf="@+id/player1Die1Button"
         app:layout_constraintStart_toStartOf="@+id/player1Die1Button"
         app:layout_constraintTop_toTopOf="@+id/player1Die1Button"
         app:srcCompat="@drawable/ic_selector" />
 
+    <ImageView
+        android:id="@+id/dividerImageView"
+        android:layout_width="370dp"
+        android:layout_height="41dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rollDiceButton"
+        app:srcCompat="@drawable/ic_divider" />
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="144dp"
         android:layout_height="146dp"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/player1Die3Button"
         app:layout_constraintStart_toEndOf="@+id/player0Die3Button"
-        app:layout_constraintTop_toBottomOf="@+id/playerTieTextView">
+        app:layout_constraintTop_toBottomOf="@+id/dividerImageView">
 
         <ImageButton
             android:id="@+id/hauntRollButton"
@@ -378,7 +396,34 @@
             android:text="@string/omen_card_count"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/rollDiceButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/piedra"
+        android:onClick="rollDice"
+        android:text="@string/roll"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/player1SumTextView"
+        app:layout_constraintStart_toEndOf="@+id/player0SumTextView"
+        app:layout_constraintTop_toBottomOf="@+id/playerTieTextView" />
+
+    <TextView
+        android:id="@+id/hauntBeginsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/piedra"
+        android:text="@string/haunt_begins"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
