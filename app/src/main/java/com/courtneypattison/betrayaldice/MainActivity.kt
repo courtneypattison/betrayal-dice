@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         return view.tag.toString().first().toString().toInt()
     }
 
-    private fun getPlayerViewId(playerNumber: Int): TextView {
+    private fun getPlayerSumTextView(playerNumber: Int): TextView {
         return if (playerNumber == 0) player0SumTextView else player1SumTextView
     }
 
@@ -114,20 +114,21 @@ class MainActivity : AppCompatActivity() {
 
         for (player1View in this.player1Views) fadeIn(player1View)
         fadeIn(hauntBeginsTextView)
-        fadeOut(hauntBeginsTextView, 5000)
+        fadeOut(hauntBeginsTextView, 3000)
     }
 
-    private fun fadeIn(view: View) {
+    private fun fadeIn(view: View, delay: Long = 0, length: Long = 1000) {
         show(view)
         ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).apply {
-            duration = 1000
+            duration = length
+            startDelay = delay
             start()
         }
     }
 
-    private fun fadeOut(view: View, delay: Long) {
+    private fun fadeOut(view: View, delay: Long = 0, length: Long = 10000) {
         ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
-            duration = 1000
+            duration = length
             startDelay = delay
             start()
         }
@@ -163,7 +164,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setPlayerScore(playerNumber: Int, score: Int) {
-        getPlayerViewId(playerNumber).text = score.toString()
+        val sumTextView = getPlayerSumTextView(playerNumber)
+
+        fadeOut(sumTextView)
+        sumTextView.text = score.toString()
+        fadeIn(sumTextView)
     }
 
     private fun show(view: View) {
