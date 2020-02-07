@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun fadeOut(view: View, delay: Long = 0, length: Long = 10000) {
+    private fun fadeOut(view: View, delay: Long = 0, length: Long = 1000) {
         ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
             duration = length
             startDelay = delay
@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
     private fun setPlayerScore(playerNumber: Int, score: Int) {
         val sumTextView = getPlayerSumTextView(playerNumber)
 
-        fadeOut(sumTextView)
+        hide(sumTextView)
         sumTextView.text = score.toString()
         fadeIn(sumTextView)
     }
