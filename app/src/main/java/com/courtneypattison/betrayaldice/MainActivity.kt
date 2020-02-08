@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
@@ -42,6 +43,12 @@ class MainActivity : AppCompatActivity() {
 
     // onClick Functions
 
+    fun attack(view: View) {
+        setPlayerScore(0, rollNDice(getDieCount(selectedDieCountButtons[0])))
+        setPlayerScore(1, rollNDice(getDieCount(selectedDieCountButtons[1])))
+        updateDamage()
+    }
+
     fun hauntRoll(view: View) {
         val sum = rollNDice(6)
 
@@ -49,14 +56,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newGame(view: View) {
+        MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+            .setTitle("New Game")
+            .setMessage("Are you sure you want to start a new game?")
+            .setCancelable(true)
+            .setPositiveButton("New Game") { _, _ -> resetGame() }
+            .setNegativeButton("Cancel") { _, _ -> {} }
+            .create()
+            .show()
+    }
+
+    fun rollDice(view: View) {
+        hideDamage()
+        setPlayerScore(0, rollNDice(getDieCount(selectedDieCountButtons[0])))
+    }
+
+    fun selectNDice(view: View) {
+        val playerNumber = getPlayerNumber(view)
+        this.selectedDieCountButtons[playerNumber] = view as Button
+        moveSelector(view, playerNumber)
+    }
+
+//    Private functions
+
+    private fun resetGame() {
         moveSelector(player0Die1Button, 0)
         moveSelector(player1Die1Button, 1)
 
         this.isHaunt = false
         this.omenCardCount = 0
         this.selectedDieCountButtons = arrayOf(player0Die1Button, player1Die1Button)
-
-        for (player1View in this.player1Views) hide(player1View)
 
         hideDamage()
 
@@ -68,23 +97,6 @@ class MainActivity : AppCompatActivity() {
         show(hauntRollButton)
         show(omenCardCountTextView)
     }
-
-    fun rollDice(view: View) {
-        setPlayerScore(0, rollNDice(getDieCount(selectedDieCountButtons[0])))
-
-        if (this.isHaunt) {
-            setPlayerScore(1, rollNDice(getDieCount(selectedDieCountButtons[1])))
-            updateDamage()
-        }
-    }
-
-    fun selectNDice(view: View) {
-        val playerNumber = getPlayerNumber(view)
-        this.selectedDieCountButtons[playerNumber] = view as Button
-        moveSelector(view, playerNumber)
-    }
-
-//    Private functions
 
     private fun getDieCount(view: View): Int {
         return view.tag.toString().last().toString().toInt()
@@ -112,7 +124,6 @@ class MainActivity : AppCompatActivity() {
         hide(hauntRollButton)
         hide(omenCardCountTextView)
 
-        for (player1View in this.player1Views) fadeIn(player1View)
         fadeIn(hauntBeginsTextView)
         fadeOut(hauntBeginsTextView, 3000)
     }
@@ -157,10 +168,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setDamage(textView: TextView, damage: Int) {
-        textView.text = damage.toString()
-
         hideDamage()
-        show(textView)
+        textView.text = damage.toString()
+        fadeIn(textView)
     }
 
     private fun setPlayerScore(playerNumber: Int, score: Int) {

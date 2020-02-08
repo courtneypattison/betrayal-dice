@@ -1,4 +1,5 @@
 <resources>
+    <string name="attack">Attack</string>
     <string name="app_name">Betrayal Dice</string>
     <string name="divider">Divides scores from buttons</string>
     <string name="eight">8</string>
