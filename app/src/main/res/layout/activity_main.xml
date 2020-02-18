@@ -7,127 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/player0Die1Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 1"
-        android:text="@string/one"
-        android:textSize="24sp"
-        app:iconPadding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rollDiceButton" />
-
-    <Button
-        android:id="@+id/player0Die2Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 2"
-        android:text="@string/two"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die1Button" />
-
-    <Button
-        android:id="@+id/player0Die3Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 3"
-        android:text="@string/three"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die2Button" />
-
-    <Button
-        android:id="@+id/player0Die4Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 4"
-        android:text="@string/four"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die3Button" />
-
-    <Button
-        android:id="@+id/player0Die5Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 5"
-        android:text="@string/five"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die4Button" />
-
-    <Button
-        android:id="@+id/player0Die6Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 6"
-        android:text="@string/six"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die5Button" />
-
-    <Button
-        android:id="@+id/player0Die7Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 7"
-        android:text="@string/seven"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die6Button" />
-
-    <Button
-        android:id="@+id/player0Die8Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="0 8"
-        android:text="@string/eight"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player0Die7Button" />
-
     <TextView
         android:id="@+id/player0SumTextView"
         android:layout_width="wrap_content"
@@ -136,130 +15,18 @@
         android:fontFamily="@font/piedra"
         android:text="@string/zero"
         android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="@+id/player0Die1Button"
-        app:layout_constraintStart_toStartOf="@+id/player0Die1Button"
+        app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/player1Die1Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+    <NumberPicker
+        android:id="@+id/player0NumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 1"
-        android:text="@string/one"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
 
-    <Button
-        android:id="@+id/player1Die2Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 2"
-        android:text="@string/two"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die1Button" />
-
-
-    <Button
-        android:id="@+id/player1Die3Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 3"
-        android:text="@string/three"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die2Button" />
-
-    <Button
-        android:id="@+id/player1Die4Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 4"
-        android:text="@string/four"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die3Button" />
-
-    <Button
-        android:id="@+id/player1Die5Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 5"
-        android:text="@string/five"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die4Button" />
-
-    <Button
-        android:id="@+id/player1Die6Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 6"
-        android:text="@string/six"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die5Button" />
-
-    <Button
-        android:id="@+id/player1Die7Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 7"
-        android:text="@string/seven"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die6Button" />
-
-    <Button
-        android:id="@+id/player1Die8Button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:onClick="selectNDice"
-        android:tag="1 8"
-        android:text="@string/eight"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Die7Button" />
 
     <TextView
         android:id="@+id/player1SumTextView"
@@ -270,9 +37,17 @@
         android:gravity="center"
         android:text="@string/zero"
         android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="@+id/player1Die1Button"
-        app:layout_constraintStart_toStartOf="@+id/player1Die1Button"
+        app:layout_constraintEnd_toEndOf="@+id/player1NumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/player1NumberPicker"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/player1NumberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
 
     <TextView
         android:id="@+id/playerTieTextView"
@@ -316,44 +91,20 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/piedra"
         android:onClick="newGame"
         android:text="@string/new_game"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/player1Die8Button"
-        app:layout_constraintStart_toEndOf="@+id/player0Die8Button" />
-
-    <ImageView
-        android:id="@+id/player0SelectorImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/player_0_selector"
-        app:layout_constraintBottom_toBottomOf="@+id/player0Die1Button"
-        app:layout_constraintEnd_toEndOf="@+id/player0Die1Button"
-        app:layout_constraintStart_toStartOf="@+id/player0Die1Button"
-        app:layout_constraintTop_toTopOf="@+id/player0Die1Button"
-        app:srcCompat="@drawable/ic_selector" />
-
-    <ImageView
-        android:id="@+id/player1SelectorImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/player_1_selector"
-        app:layout_constraintBottom_toBottomOf="@+id/player1Die1Button"
-        app:layout_constraintEnd_toEndOf="@+id/player1Die1Button"
-        app:layout_constraintStart_toStartOf="@+id/player1Die1Button"
-        app:layout_constraintTop_toTopOf="@+id/player1Die1Button"
-        app:srcCompat="@drawable/ic_selector" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/dividerImageView"
         android:layout_width="370dp"
         android:layout_height="72dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/divider"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
@@ -366,8 +117,8 @@
         android:layout_width="144dp"
         android:layout_height="146dp"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/player1Die3Button"
-        app:layout_constraintStart_toEndOf="@+id/player0Die3Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dividerImageView">
 
         <ImageButton
@@ -404,8 +155,8 @@
         android:onClick="rollDice"
         android:text="@string/roll"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/player0SumTextView"
-        app:layout_constraintStart_toStartOf="@+id/player0SumTextView"
+        app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
         app:layout_constraintTop_toBottomOf="@+id/player0SumTextView" />
 
     <TextView
@@ -422,7 +173,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/attackButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -430,8 +181,8 @@
         android:onClick="attack"
         android:text="@string/attack"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/player1SumTextView"
-        app:layout_constraintStart_toStartOf="@+id/player1SumTextView"
+        app:layout_constraintEnd_toEndOf="@+id/player1NumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/player1NumberPicker"
         app:layout_constraintTop_toBottomOf="@+id/player1SumTextView"
         tools:visibility="visible" />
 

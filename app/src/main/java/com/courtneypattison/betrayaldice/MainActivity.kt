@@ -2,9 +2,10 @@ package com.courtneypattison.betrayaldice
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,37 +16,22 @@ class MainActivity : AppCompatActivity() {
 
     private var isHaunt = false
     private var omenCardCount = 0
-    private lateinit var player1Views: Array<View>
-    private lateinit var selectedDieCountButtons: Array<Button>
-    private lateinit var selectorImageViews: Array<ImageView>
-    private var selectorYs = arrayOf(0f, 0f)
+    private var playerDieCount = arrayOf(0, 0)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.player1Views = arrayOf(
-            player1SumTextView,
-            player1SelectorImageView,
-            player1Die1Button,
-            player1Die2Button,
-            player1Die3Button,
-            player1Die4Button,
-            player1Die5Button,
-            player1Die6Button,
-            player1Die7Button,
-            player1Die8Button
-        )
-        this.selectedDieCountButtons = arrayOf(player0Die1Button, player1Die1Button)
-        this.selectorImageViews = arrayOf(player0SelectorImageView, player1SelectorImageView)
+        this.setNumberPicker(player0NumberPicker, 0)
+        this.setNumberPicker(player1NumberPicker, 1)
     }
 
     // onClick Functions
 
     fun attack(view: View) {
-        setPlayerScore(0, rollNDice(getDieCount(selectedDieCountButtons[0])))
-        setPlayerScore(1, rollNDice(getDieCount(selectedDieCountButtons[1])))
+        setPlayerScore(0, rollNDice(playerDieCount[0]))
+        setPlayerScore(1, rollNDice(playerDieCount[1]))
         updateDamage()
     }
 
@@ -61,31 +47,28 @@ class MainActivity : AppCompatActivity() {
             .setMessage("Are you sure you want to start a new game?")
             .setCancelable(true)
             .setPositiveButton("New Game") { _, _ -> resetGame() }
-            .setNegativeButton("Cancel") { _, _ -> {} }
+            .setNegativeButton("Cancel") { _, _ -> }
             .create()
             .show()
     }
 
     fun rollDice(view: View) {
         hideDamage()
-        setPlayerScore(0, rollNDice(getDieCount(selectedDieCountButtons[0])))
-    }
-
-    fun selectNDice(view: View) {
-        val playerNumber = getPlayerNumber(view)
-        this.selectedDieCountButtons[playerNumber] = view as Button
-        moveSelector(view, playerNumber)
+        setPlayerScore(0, rollNDice(playerDieCount[0]))
     }
 
 //    Private functions
 
-    private fun resetGame() {
-        moveSelector(player0Die1Button, 0)
-        moveSelector(player1Die1Button, 1)
+    private fun setNumberPicker(numberPicker: NumberPicker, playerNumber: Int) {
+        numberPicker.maxValue = 8
+        numberPicker.minValue = 1
+        numberPicker.setOnValueChangedListener {_, _, newVal -> playerDieCount[playerNumber] = newVal}
+    }
 
+    private fun resetGame() {
         this.isHaunt = false
         this.omenCardCount = 0
-        this.selectedDieCountButtons = arrayOf(player0Die1Button, player1Die1Button)
+        this.playerDieCount = arrayOf(0, 0)
 
         hideDamage()
 
@@ -94,16 +77,10 @@ class MainActivity : AppCompatActivity() {
 
         omenCardCountTextView.text = this.omenCardCount.toString()
 
+        setButtonColors(getColor(R.color.colorPrimary))
+
         show(hauntRollButton)
         show(omenCardCountTextView)
-    }
-
-    private fun getDieCount(view: View): Int {
-        return view.tag.toString().last().toString().toInt()
-    }
-
-    private fun getPlayerNumber(view: View): Int {
-        return view.tag.toString().first().toString().toInt()
     }
 
     private fun getPlayerSumTextView(playerNumber: Int): TextView {
@@ -119,13 +96,29 @@ class MainActivity : AppCompatActivity() {
         omenCardCountTextView.text = this.omenCardCount.toString()
     }
 
+    private fun setTextColor(button: Button, color: Int) {
+        button.setTextColor(color)
+    }
+
+    private fun setButtonColors(color: Int) {
+        setTextColor(rollDiceButton, color)
+        setTextColor(attackButton, color)
+        setTextColor(newGameButton, color)
+    }
+
     private fun beginHaunt() {
         this.isHaunt = true
         hide(hauntRollButton)
         hide(omenCardCountTextView)
 
-        fadeIn(hauntBeginsTextView)
-        fadeOut(hauntBeginsTextView, 3000)
+        fadeOut(constraintLayout)
+        Handler().postDelayed({
+            setButtonColors(getColor(R.color.colorPrimaryHaunt))
+            show(hauntBeginsTextView)
+        }, 2000)
+
+        fadeIn(constraintLayout, 2000)
+        fadeOut(hauntBeginsTextView, 6000)
     }
 
     private fun fadeIn(view: View, delay: Long = 0, length: Long = 1000) {
@@ -141,16 +134,6 @@ class MainActivity : AppCompatActivity() {
         ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
             duration = length
             startDelay = delay
-            start()
-        }
-    }
-
-    private fun moveSelector(view: View, playerNumber: Int) {
-        if (this.selectorYs[playerNumber] == 0f) this.selectorYs[playerNumber] = selectorImageViews[playerNumber].y + 7f
-        val difference = view.y - this.selectorYs[playerNumber]
-
-        ObjectAnimator.ofFloat(selectorImageViews[playerNumber], "translationY", difference).apply {
-            duration = 1000
             start()
         }
     }
