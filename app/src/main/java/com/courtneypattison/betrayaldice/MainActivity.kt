@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.eventTie.observe(this, Observer<Boolean> { isTie ->
             if (isTie) {
                 hideDamage()
-                show(tieTextView)
+                fadeIn(tieTextView)
             } else {
                 hide(tieTextView)
             }
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 hide(player0DamageTextView)
             } else {
                 player0DamageTextView.text = damage.toString()
-                show(player0DamageTextView)
+                fadeIn(player0DamageTextView)
             }
         })
 
@@ -56,16 +56,18 @@ class MainActivity : AppCompatActivity() {
                 hide(player1DamageTextView)
             } else {
                 player1DamageTextView.text = damage.toString()
-                show(player1DamageTextView)
+                fadeIn(player1DamageTextView)
             }
         })
 
         viewModel.player0Score.observe(this, Observer<Int> { score ->
             player0ScoreTextView.text = score.toString()
+            fadeIn(player0ScoreTextView)
         })
 
         viewModel.player1Score.observe(this, Observer<Int> { score ->
             player1ScoreTextView.text = score.toString()
+            fadeIn(player1ScoreTextView)
         })
     }
 
