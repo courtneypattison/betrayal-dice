@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/player0SumTextView"
+        android:id="@+id/player0ScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,7 +29,7 @@
 
 
     <TextView
-        android:id="@+id/player1SumTextView"
+        android:id="@+id/player1ScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -50,13 +50,15 @@
         app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
 
     <TextView
-        android:id="@+id/playerTieTextView"
+        android:id="@+id/tieTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/piedra"
+        android:text="@string/zero"
         android:textColor="@color/colorWarn"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +73,8 @@
         android:fontFamily="@font/piedra"
         android:textColor="#FF1744"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/player0SumTextView"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/player0ScoreTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -83,7 +86,8 @@
         android:fontFamily="@font/piedra"
         android:textColor="#FF1744"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/player1SumTextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/player1ScoreTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -93,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/piedra"
-        android:onClick="newGame"
+        android:onClick="onNewGame"
         android:text="@string/new_game"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,7 +113,7 @@
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerTieTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tieTextView"
         app:srcCompat="@drawable/ic_divider" />
 
     <RelativeLayout
@@ -130,7 +134,7 @@
             android:layout_marginTop="52dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:contentDescription="@string/haunt_roll_button"
-            android:onClick="hauntRoll"
+            android:onClick="onHauntRoll"
             android:theme="@style/AppTheme.Ripple"
             app:srcCompat="@drawable/ic_crow" />
 
@@ -152,12 +156,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/piedra"
-        android:onClick="rollDice"
+        android:onClick="onRollDice"
         android:text="@string/roll"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
         app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
-        app:layout_constraintTop_toBottomOf="@+id/player0SumTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/player0ScoreTextView" />
 
     <TextView
         android:id="@+id/hauntBeginsTextView"
@@ -178,12 +182,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/piedra"
-        android:onClick="attack"
+        android:onClick="onAttack"
         android:text="@string/attack"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/player1NumberPicker"
         app:layout_constraintStart_toStartOf="@+id/player1NumberPicker"
-        app:layout_constraintTop_toBottomOf="@+id/player1SumTextView"
+        app:layout_constraintTop_toBottomOf="@+id/player1ScoreTextView"
         tools:visibility="visible" />
 
 
