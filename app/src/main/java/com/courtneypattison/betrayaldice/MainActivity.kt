@@ -6,6 +6,8 @@ import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
+    private var alertDialogTheme = R.style.MaterialAlertDialogCustom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +28,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.eventHaunt.observe(this, Observer<Boolean> { isHaunt ->
-            if (isHaunt) beginHaunt()
+        viewModel.eventHaunt.observe(this, Observer<Boolean> { eventHaunt ->
+            if (eventHaunt) beginHaunt()
         })
 
         viewModel.eventTie.observe(this, Observer<Boolean> { isTie ->
-            if (isTie) {
-                hideDamage()
-                fadeIn(tieTextView)
-            } else {
-                hide(tieTextView)
-            }
+            if (isTie) fadeIn(tieTextView)
+        })
+
+        viewModel.isHaunt.observe(this, Observer<Boolean> { isHaunt ->
+            if (isHaunt) styleHaunt()
         })
 
         viewModel.omenCardCount.observe(this, Observer<Int> { omenCardCount ->
@@ -43,21 +45,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.player0Damage.observe(this, Observer<Int> { damage ->
-            if (damage == 0) {
-                hide(player0DamageTextView)
-            } else {
-                player0DamageTextView.text = damage.toString()
-                fadeIn(player0DamageTextView)
-            }
+            updateDamage(player0DamageTextView, damage)
         })
 
         viewModel.player1Damage.observe(this, Observer<Int> { damage ->
-            if (damage == 0) {
-                hide(player1DamageTextView)
-            } else {
-                player1DamageTextView.text = damage.toString()
-                fadeIn(player1DamageTextView)
-            }
+            updateDamage(player1DamageTextView, damage)
         })
 
         viewModel.player0Score.observe(this, Observer<Int> { score ->
@@ -74,6 +66,7 @@ class MainActivity : AppCompatActivity() {
     /** onClick methods **/
 
     fun onAttack(view: View) {
+        hideDamage()
         viewModel.onAttack()
     }
 
@@ -82,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onNewGame(view: View) {
-        MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+        MaterialAlertDialogBuilder(this, alertDialogTheme)
             .setTitle("New Game")
             .setMessage("Are you sure you want to start a new game?")
             .setCancelable(true)
@@ -108,6 +101,15 @@ class MainActivity : AppCompatActivity() {
         viewModel.onRollDice()
     }
 
+    private fun updateDamage(damageTextView: TextView, damage: Int) {
+        if (damage == 0) {
+            hide(damageTextView)
+        } else {
+            damageTextView.text = damage.toString()
+            fadeIn(damageTextView)
+        }
+    }
+
     /**
      * Number picker setup
      */
@@ -120,32 +122,30 @@ class MainActivity : AppCompatActivity() {
     /**
      * Changes app style for haunt
      */
-    private fun beginHaunt() {
+    private fun styleHaunt() {
         hide(hauntRollButton)
         hide(omenCardCountTextView)
 
-        fadeOut(constraintLayout)
-        Handler().postDelayed({
-            setButtonColors(getColor(R.color.colorPrimaryHaunt))
-            show(hauntBeginsTextView)
-        }, 2000)
+        alertDialogTheme = R.style.MaterialAlertDialogHaunt
 
-        fadeIn(constraintLayout, 2000)
-        fadeOut(hauntBeginsTextView, 6000)
+        setButtonColors(getColor(R.color.colorSecondary))
+    }
+
+    private fun beginHaunt() {
+        hide(constraintLayout)
+        fadeIn(constraintLayout)
+        Toast.makeText(this, getString(R.string.haunt_begins), Toast.LENGTH_LONG).show()
 
         viewModel.beginHauntComplete()
     }
 
-    /** Color functions **/
-
-    private fun setTextColor(button: Button, color: Int) {
-        button.setTextColor(color)
-    }
-
+    /**
+     * Changes button colors
+     */
     private fun setButtonColors(color: Int) {
-        setTextColor(rollDiceButton, color)
-        setTextColor(attackButton, color)
-        setTextColor(newGameButton, color)
+        attackButton.setTextColor(color)
+        newGameButton.setTextColor(color)
+        rollDiceButton.setTextColor(color)
     }
 
     /** Visibility functions **/
@@ -153,14 +153,6 @@ class MainActivity : AppCompatActivity() {
     private fun fadeIn(view: View, delay: Long = 0, length: Long = 1000) {
         show(view)
         ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).apply {
-            duration = length
-            startDelay = delay
-            start()
-        }
-    }
-
-    private fun fadeOut(view: View, delay: Long = 0, length: Long = 1000) {
-        ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
             duration = length
             startDelay = delay
             start()

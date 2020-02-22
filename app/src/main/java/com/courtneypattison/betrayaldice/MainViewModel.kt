@@ -1,6 +1,5 @@
 package com.courtneypattison.betrayaldice
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,11 @@ class MainViewModel : ViewModel() {
     val eventTie: LiveData<Boolean>
         get() = _eventTie
 
+    // If it is currently the haunt
+    private var _isHaunt = MutableLiveData<Boolean>()
+    val isHaunt: LiveData<Boolean>
+        get() = _isHaunt
+
     // The number of omen cards revealed
     private var _omenCardCount = MutableLiveData<Int>()
     val omenCardCount: LiveData<Int>
@@ -35,10 +39,10 @@ class MainViewModel : ViewModel() {
         get() = _player1Damage
 
     // The number of dice player 0 will roll
-    private var _player0DieCount = MutableLiveData<Int>()
+    private var player0DieCount = MutableLiveData<Int>()
 
     // The number of dice player 1 will roll
-    private var _player1DieCount = MutableLiveData<Int>()
+    private var player1DieCount = MutableLiveData<Int>()
 
     // Score from roll for player 0
     private var _player0Score = MutableLiveData<Int>()
@@ -59,14 +63,14 @@ class MainViewModel : ViewModel() {
     }
 
     fun setDieCount(playerNumber: Int, dieCount: Int) {
-        if (playerNumber == 0) _player0DieCount.value = dieCount else _player1DieCount.value = dieCount
+        if (playerNumber == 0) player0DieCount.value = dieCount else player1DieCount.value = dieCount
     }
 
     /** onClick methods **/
 
     fun onAttack() {
-        _player0Score.value = rollNDice(_player0DieCount.value!!)
-        _player1Score.value = rollNDice(_player1DieCount.value!!)
+        _player0Score.value = rollNDice(player0DieCount.value!!)
+        _player1Score.value = rollNDice(player1DieCount.value!!)
         updateDamage()
     }
 
@@ -79,13 +83,14 @@ class MainViewModel : ViewModel() {
     }
 
     fun onRollDice() {
-        _player0Score.value = rollNDice(_player0DieCount.value!!)
+        _player0Score.value = rollNDice(player0DieCount.value!!)
     }
 
     /** Private methods **/
 
     private fun beginHaunt() {
         _eventHaunt.value = true
+        _isHaunt.value = true
     }
 
     private fun incrementOmenCardCount() {
@@ -95,11 +100,12 @@ class MainViewModel : ViewModel() {
     private fun setDefaultValues() {
         _eventHaunt.value = false
         _eventTie.value = false
+        _isHaunt.value = false
         _omenCardCount.value = 0
         _player0Damage.value = 0
         _player1Damage.value = 0
-        _player0DieCount.value = 1
-        _player1DieCount.value = 1
+        player0DieCount.value = 1
+        player1DieCount.value = 1
         _player0Score.value = 0
         _player1Score.value = 0
     }
