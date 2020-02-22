@@ -3,15 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/piedra</item>
     </style>
 
     <style name="AppTheme.Ripple">
         <item name="colorControlHighlight">@color/colorPrimaryFocused</item>
     </style>
 
-    <style name="MaterialAlertDialogText" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="MaterialAlertDialogCustom" parent="@style/MaterialAlertDialog.MaterialComponents">
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:fontFamily">@font/piedra</item>
+    </style>
+
+    <style name="MaterialAlertDialogHaunt" parent="MaterialAlertDialogCustom">
+        <item name="colorPrimary">@color/colorSecondary</item>
     </style>
 
 </resources>
