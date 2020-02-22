@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
         android:text="@string/zero"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
@@ -25,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/rollDiceButton" />
 
 
     <TextView
@@ -33,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
         android:gravity="center"
         android:text="@string/zero"
         android:textSize="36sp"
@@ -47,16 +45,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/attackButton" />
 
     <TextView
         android:id="@+id/tieTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
         android:text="@string/zero"
-        android:textColor="@color/colorWarn"
+        android:textColor="@color/colorSecondary"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,8 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/piedra"
-        android:textColor="#FF1744"
+        android:textColor="@color/colorSecondary"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/player0ScoreTextView"
@@ -83,8 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/piedra"
-        android:textColor="#FF1744"
+        android:textColor="@color/colorSecondary"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/player1ScoreTextView"
@@ -96,7 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/piedra"
         android:onClick="onNewGame"
         android:text="@string/new_game"
         android:textSize="18sp"
@@ -104,26 +98,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/dividerImageView"
-        android:layout_width="370dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/divider"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tieTextView"
-        app:srcCompat="@drawable/ic_divider" />
-
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="144dp"
         android:layout_height="146dp"
         android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/player0NumberPicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerImageView">
+        app:layout_constraintTop_toTopOf="@+id/player0NumberPicker">
 
         <ImageButton
             android:id="@+id/hauntRollButton"
@@ -131,7 +114,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="52dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:contentDescription="@string/haunt_roll_button"
             android:onClick="onHauntRoll"
@@ -143,7 +125,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/piedra"
             android:text="@string/omen_card_count"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
@@ -155,7 +136,6 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/piedra"
         android:onClick="onRollDice"
         android:text="@string/roll"
         android:textSize="18sp"
@@ -163,25 +143,11 @@
         app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
         app:layout_constraintTop_toBottomOf="@+id/player0ScoreTextView" />
 
-    <TextView
-        android:id="@+id/hauntBeginsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/piedra"
-        android:text="@string/haunt_begins"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/attackButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/piedra"
         android:onClick="onAttack"
         android:text="@string/attack"
         android:textSize="18sp"
