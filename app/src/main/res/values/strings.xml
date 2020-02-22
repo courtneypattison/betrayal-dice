@@ -2,23 +2,16 @@
     <string name="attack">Attack</string>
     <string name="app_name">Betrayal Dice</string>
     <string name="divider">Divides scores from buttons</string>
-    <string name="eight">8</string>
-    <string name="five">5</string>
-    <string name="four">4</string>
     <string name="haunt">Haunt</string>
     <string name="haunt_begins">The haunt begins…</string>
     <string name="haunt_roll">Haunt Roll</string>
     <string name="haunt_roll_button">Haunt roll button</string>
     <string name="new_game">New Game</string>
+    <string name="no_haunt">No haunt yet…</string>
     <string name="omen_card_count">0</string>
     <string name="omen_card_count_label">Omen Card Count</string>
-    <string name="one">1</string>
     <string name="player_0_selector">Player 0 die count selector</string>
     <string name="player_1_selector">Player 1 die count selector</string>
     <string name="roll">Roll</string>
-    <string name="seven">7</string>
-    <string name="six">6</string>
-    <string name="three">3</string>
-    <string name="two">2</string>
     <string name="zero">0</string>
 </resources>
