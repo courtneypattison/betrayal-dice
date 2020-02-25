@@ -2,16 +2,16 @@ package com.courtneypattison.betrayaldice
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -90,7 +90,8 @@ class MainActivity : AppCompatActivity() {
 
         hideDamage()
 
-        setButtonColors(getColor(R.color.colorPrimary))
+        alertDialogTheme = R.style.MaterialAlertDialogCustom
+        setAllButtonColors(getColor(R.color.colorPrimary), R.color.button_primary)
 
         show(hauntRollButton)
         show(omenCardCountTextView)
@@ -128,24 +129,31 @@ class MainActivity : AppCompatActivity() {
 
         alertDialogTheme = R.style.MaterialAlertDialogHaunt
 
-        setButtonColors(getColor(R.color.colorSecondary))
+        setAllButtonColors(getColor(R.color.colorSecondary), R.color.button_secondary)
     }
 
     private fun beginHaunt() {
         hide(constraintLayout)
         fadeIn(constraintLayout)
-        Toast.makeText(this, getString(R.string.haunt_begins), Toast.LENGTH_LONG).show()
+        Snackbar.make(hauntRollButton, getString(R.string.haunt_begins), Snackbar.LENGTH_LONG).show()
 
         viewModel.beginHauntComplete()
     }
 
+    private fun setButtonColor(button: Button, color: Int, colorStateListID: Int) {
+        button.setTextColor(color)
+        (button as MaterialButton).rippleColor = getColorStateList(colorStateListID)
+    }
+
+
+
     /**
-     * Changes button colors
+     * Changes all visible button colors
      */
-    private fun setButtonColors(color: Int) {
-        attackButton.setTextColor(color)
-        newGameButton.setTextColor(color)
-        rollDiceButton.setTextColor(color)
+    private fun setAllButtonColors(color: Int, colorStateListID: Int) {
+        setButtonColor(attackButton, color, colorStateListID)
+        setButtonColor(newGameButton, color, colorStateListID)
+        setButtonColor(rollDiceButton, color, colorStateListID)
     }
 
     /** Visibility functions **/
