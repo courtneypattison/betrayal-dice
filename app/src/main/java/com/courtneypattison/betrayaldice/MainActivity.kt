@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.omenCardCount.observe(this, Observer<Int> { omenCardCount ->
             omenCardCountTextView.text = omenCardCount.toString()
+            if (unsuccessfulHauntRoll()) showNoHaunt()
         })
 
         viewModel.player0Damage.observe(this, Observer<Int> { damage ->
@@ -112,6 +113,16 @@ class MainActivity : AppCompatActivity() {
         viewModel.onRollDice()
     }
 
+    /**
+     * Checks if haunt roll started the haunt
+     */
+    private fun unsuccessfulHauntRoll(): Boolean {
+        return !viewModel.isHaunt.value!! && viewModel.omenCardCount.value!! > 0
+    }
+
+    /**
+     * Update damage text view's visibility and text
+     */
     private fun updateDamage(damageTextView: TextView, damage: Int) {
         if (damage == 0) {
             hide(damageTextView)
@@ -142,20 +153,24 @@ class MainActivity : AppCompatActivity() {
         setAllButtonColors(getColor(R.color.colorSecondary), R.color.button_secondary)
     }
 
+    /**
+     * Changes app when haunt first begins (happens only once per game)
+     */
     private fun beginHaunt() {
         hide(constraintLayout)
         fadeIn(constraintLayout)
-        Snackbar.make(hauntRollButton, getString(R.string.haunt_begins), Snackbar.LENGTH_LONG).show()
+        showHauntBegins()
 
         viewModel.beginHauntComplete()
     }
 
+    /**
+     * Changes button color, including ripple color
+     */
     private fun setButtonColor(button: Button, color: Int, colorStateListID: Int) {
         button.setTextColor(color)
         (button as MaterialButton).rippleColor = getColorStateList(colorStateListID)
     }
-
-
 
     /**
      * Changes all visible button colors
@@ -164,6 +179,20 @@ class MainActivity : AppCompatActivity() {
         setButtonColor(attackButton, color, colorStateListID)
         setButtonColor(newGameButton, color, colorStateListID)
         setButtonColor(rollDiceButton, color, colorStateListID)
+    }
+
+    /**
+     * Shows snackbar with haunt begins message
+     */
+    private fun showHauntBegins() {
+        Snackbar.make(hauntRollButton, getString(R.string.haunt_begins), Snackbar.LENGTH_LONG).show()
+    }
+
+    /**
+     * Shows snackbar with no haunt message
+     */
+    private fun showNoHaunt() {
+        Snackbar.make(omenCardCountTextView, getString(R.string.no_haunt), Snackbar.LENGTH_SHORT).show()
     }
 
     /** Visibility functions **/
