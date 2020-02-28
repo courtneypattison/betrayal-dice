@@ -53,6 +53,11 @@ class MainActivity : AppCompatActivity() {
             updateDamage(player1DamageTextView, damage)
         })
 
+        viewModel.player0DieCount.observe(this, Observer<Int> { dieCount ->
+            removeOutcomeProbabilities()
+            addOutcomeProbabilities(dieCount)
+        })
+
         viewModel.player0Score.observe(this, Observer<Int> { score ->
             player0ScoreTextView.text = score.toString()
             fadeIn(player0ScoreTextView)
@@ -130,6 +135,34 @@ class MainActivity : AppCompatActivity() {
             damageTextView.text = damage.toString()
             fadeIn(damageTextView)
         }
+    }
+
+    /**
+     * Add outcome probabilities to table
+     */
+    private fun addOutcomeProbabilities(dieCount: Int) {
+        for (i in 0..16) {
+            outcomeTableLayout.setColumnStretchable(i, true)
+
+            val outcomeTextView = TextView(this)
+            outcomeTextView.text = i.toString()
+            outcomeTableRow.addView(outcomeTextView)
+        }
+
+        for (outcomeProbability in viewModel.outcomeProbabilities[dieCount]) {
+            val outcomeProbabilityTextView = TextView(this)
+            outcomeProbabilityTextView.text = outcomeProbability.toString()
+            outcomeProbabilityTextView.setPadding(0, 0, 32, 0)
+            outcomeProbabilitiesTableRow.addView(outcomeProbabilityTextView)
+        }
+    }
+
+    /**
+     * Remove outcome probabilities from table
+     */
+    private fun removeOutcomeProbabilities() {
+        outcomeTableRow.removeAllViews()
+        outcomeProbabilitiesTableRow.removeAllViews()
     }
 
     /**

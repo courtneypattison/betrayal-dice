@@ -66,6 +66,18 @@ class MainViewModel : ViewModel() {
     val player1ScorePrev: LiveData<Int>
         get() = _player1ScorePrev
 
+    val outcomeProbabilities = arrayOf(
+        floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(33.3f, 33.3f, 33.3f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(11f, 22f, 33f, 22f, 11f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(4f, 11f, 22f, 26f, 22f, 11f, 4f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(1f, 5f, 12f, 20f, 23f, 20f, 12f, 5f, 1f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(0f, 2f, 6f, 12f, 19f, 21f, 19f, 12f, 6f, 2f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(0f, 1f, 3f, 7f, 12f, 17f, 19f, 17f, 12f, 7f, 3f, 1f, 0f, 0f, 0f, 0f, 0f),
+        floatArrayOf(0f, 0f, 1f, 4f, 7f, 12f, 16f, 18f, 16f, 12f, 7f, 4f, 1f, 0f, 0f, 0f, 0f),
+        floatArrayOf(0f, 0f, 1f, 2f, 4f, 8f, 12f, 15f, 17f, 15f, 12f, 8f, 4f, 2f, 1f, 0f, 0f)
+    )
+
     init {
         setDefaultValues()
     }
