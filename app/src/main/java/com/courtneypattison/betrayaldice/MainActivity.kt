@@ -57,9 +57,19 @@ class MainActivity : AppCompatActivity() {
             fadeIn(player0ScoreTextView)
         })
 
+        viewModel.player0ScorePrev.observe(this, Observer<Int> { scorePrev ->
+            player0ScorePrevTextView.text = scorePrev.toString()
+            fadeIn(player0ScorePrevTextView)
+        })
+
         viewModel.player1Score.observe(this, Observer<Int> { score ->
             player1ScoreTextView.text = score.toString()
             fadeIn(player1ScoreTextView)
+        })
+
+        viewModel.player1ScorePrev.observe(this, Observer<Int> { scorePrev ->
+            player1ScorePrevTextView.text = scorePrev.toString()
+            fadeIn(player1ScorePrevTextView)
         })
     }
 

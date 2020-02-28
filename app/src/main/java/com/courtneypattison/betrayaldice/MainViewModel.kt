@@ -39,7 +39,9 @@ class MainViewModel : ViewModel() {
         get() = _player1Damage
 
     // The number of dice player 0 will roll
-    private var player0DieCount = MutableLiveData<Int>()
+    private var _player0DieCount = MutableLiveData<Int>()
+    val player0DieCount: LiveData<Int>
+        get() = _player0DieCount
 
     // The number of dice player 1 will roll
     private var player1DieCount = MutableLiveData<Int>()
@@ -49,10 +51,20 @@ class MainViewModel : ViewModel() {
     val player0Score: LiveData<Int>
         get() = _player0Score
 
+    // Score from previous roll for player 0
+    private var _player0ScorePrev = MutableLiveData<Int>()
+    val player0ScorePrev: LiveData<Int>
+        get() = _player0ScorePrev
+
     // Score from roll for player 1
     private var _player1Score = MutableLiveData<Int>()
     val player1Score: LiveData<Int>
         get() = _player1Score
+
+    // Score from previous roll for player 1
+    private var _player1ScorePrev = MutableLiveData<Int>()
+    val player1ScorePrev: LiveData<Int>
+        get() = _player1ScorePrev
 
     init {
         setDefaultValues()
@@ -63,14 +75,18 @@ class MainViewModel : ViewModel() {
     }
 
     fun setDieCount(playerNumber: Int, dieCount: Int) {
-        if (playerNumber == 0) player0DieCount.value = dieCount else player1DieCount.value = dieCount
+        if (playerNumber == 0) _player0DieCount.value = dieCount else player1DieCount.value = dieCount
     }
 
     /** onClick methods **/
 
     fun onAttack() {
+        _player0ScorePrev.value = _player0Score.value
+        _player1ScorePrev.value = _player1Score.value
+
         _player0Score.value = rollNDice(player0DieCount.value!!)
         _player1Score.value = rollNDice(player1DieCount.value!!)
+
         updateDamage()
     }
 
@@ -83,6 +99,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun onRollDice() {
+        _player0ScorePrev.value = _player0Score.value
         _player0Score.value = rollNDice(player0DieCount.value!!)
     }
 
@@ -104,10 +121,12 @@ class MainViewModel : ViewModel() {
         _omenCardCount.value = 0
         _player0Damage.value = 0
         _player1Damage.value = 0
-        player0DieCount.value = 1
+        _player0DieCount.value = 1
         player1DieCount.value = 1
         _player0Score.value = 0
+        _player0ScorePrev.value = 0
         _player1Score.value = 0
+        _player1ScorePrev.value = 0
     }
 
     private fun rollDie(): Int {
