@@ -21,10 +21,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }
 }
 
 dependencies {
     def lifecycle_version = "2.2.0"
+    def androidXTestCoreVersion = '1.2.0'
+    def androidXTestExtKotlinRunnerVersion = '1.1.1'
+    def robolectricVersion = '4.4'
+    def archTestingVersion = '2.1.0'
 
     // Core
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,4 +53,8 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
 }
