@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -92,11 +93,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onNewGame(view: View) {
         MaterialAlertDialogBuilder(this, alertDialogTheme)
-            .setTitle("New Game")
-            .setMessage("Are you sure you want to start a new game?")
+            .setTitle(getString(R.string.new_game))
+            .setMessage(getString(R.string.new_game_message))
             .setCancelable(true)
-            .setPositiveButton("New Game") { _, _ -> onNewGameConfirm() }
-            .setNegativeButton("Cancel") { _, _ -> }
+            .setPositiveButton(getString(R.string.new_game)) { _, _ -> onNewGameConfirm() }
+            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
             .create()
             .show()
     }
@@ -215,10 +216,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Shows snackbar with haunt begins message
+     * Shows alert dialog with haunt begins message
      */
     private fun showHauntBegins() {
-        Snackbar.make(hauntRollButton, getString(R.string.haunt_begins), Snackbar.LENGTH_LONG).show()
+        MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogHaunt)
+            .setTitle(getString(R.string.haunt_begins))
+            .setPositiveButton(getString(R.string.continue_please)) { _, _ -> }
+            .create()
+            .show()
     }
 
     /**
