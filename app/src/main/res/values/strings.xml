@@ -1,12 +1,15 @@
 <resources>
     <string name="attack">Attack</string>
     <string name="app_name">Betrayal Dice</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_please">Continue</string>
     <string name="divider">Divides scores from buttons</string>
     <string name="haunt">Haunt</string>
     <string name="haunt_begins">The haunt begins…</string>
     <string name="haunt_roll">Haunt Roll</string>
     <string name="haunt_roll_button">Haunt roll button</string>
     <string name="new_game">New Game</string>
+    <string name="new_game_message">Are you sure you want to start a new game?</string>
     <string name="no_haunt">No haunt yet…</string>
     <string name="omen_card_count">0</string>
     <string name="omen_card_count_label">Omen Card Count</string>
