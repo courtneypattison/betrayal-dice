@@ -1,6 +1,8 @@
 # BetrayalDice
 An Android app that replaces the dice in Betrayal at House on the Hill.
 
+![betrayalDice](/images/betrayalDice.gif)
+
 # Screenshots
 See the probability of your desired roll outcome in the "Outcome Outcome Probabilities" table.
 
