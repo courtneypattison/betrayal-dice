@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -142,20 +141,36 @@ class MainActivity : AppCompatActivity() {
      * Add outcome probabilities to table
      */
     private fun addOutcomeProbabilities(dieCount: Int) {
-        for (i in 0..16) {
-            outcomeTableLayout.setColumnStretchable(i, true)
-
-            val outcomeTextView = TextView(this)
-            outcomeTextView.text = i.toString()
-            outcomeTableRow.addView(outcomeTextView)
+        addOutcomeColumn(0, getString(R.string.outcome))
+        for (i in viewModel.outcomeProbabilities[dieCount].indices) {
+            addOutcomeColumn(i + 1, i.toString())
         }
 
+        addOutcomeProbabilityColumn(getString(R.string.outcome_probability))
         for (outcomeProbability in viewModel.outcomeProbabilities[dieCount]) {
-            val outcomeProbabilityTextView = TextView(this)
-            outcomeProbabilityTextView.text = outcomeProbability.toString()
-            outcomeProbabilityTextView.setPadding(0, 0, 32, 0)
-            outcomeProbabilitiesTableRow.addView(outcomeProbabilityTextView)
+            addOutcomeProbabilityColumn(outcomeProbability.toString())
         }
+    }
+
+    /**
+     * Add outcome column to table
+     */
+    private fun addOutcomeColumn(index: Int, colName: String) {
+        outcomeTableLayout.setColumnStretchable(index, true)
+
+        val outcomeTextView = TextView(this)
+        outcomeTextView.text = colName
+        outcomeTableRow.addView(outcomeTextView)
+    }
+
+    /**
+     * Add outcome probability column to table
+     */
+    private fun addOutcomeProbabilityColumn(colName: String) {
+        val outcomeProbabilityTextView = TextView(this)
+        outcomeProbabilityTextView.text = colName
+        outcomeProbabilityTextView.setPadding(0, 0, 32, 0)
+        outcomeProbabilitiesTableRow.addView(outcomeProbabilityTextView)
     }
 
     /**

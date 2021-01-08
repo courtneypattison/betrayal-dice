@@ -13,8 +13,11 @@
     <string name="no_haunt">No haunt yet…</string>
     <string name="omen_card_count">0</string>
     <string name="omen_card_count_label">Omen Card Count</string>
+    <string name="outcome">Roll outcome</string>
+    <string name="outcome_probability">Probability (%)</string>
     <string name="player_0_selector">Player 0 die count selector</string>
     <string name="player_1_selector">Player 1 die count selector</string>
     <string name="roll">Roll</string>
+    <string name="roll_outcome_probabilities">Roll Outcome Probabilities</string>
     <string name="zero">0</string>
 </resources>
