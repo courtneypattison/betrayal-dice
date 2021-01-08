@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -235,17 +234,23 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showHauntBegins() {
         MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogHaunt)
-            .setTitle(getString(R.string.haunt_begins))
+            .setTitle(getString(R.string.haunt_roll))
+            .setMessage(getString(R.string.haunt_begins))
             .setPositiveButton(getString(R.string.continue_please)) { _, _ -> }
             .create()
             .show()
     }
 
     /**
-     * Shows snackbar with no haunt message
+     * Shows alert dialog with no haunt message
      */
     private fun showNoHaunt() {
-        Snackbar.make(omenCardCountTextView, getString(R.string.no_haunt), Snackbar.LENGTH_SHORT).show()
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.haunt_roll))
+            .setMessage(getString(R.string.no_haunt))
+            .setPositiveButton(getString(R.string.continue_please)) { _, _ -> }
+            .create()
+            .show()
     }
 
     /** Visibility functions **/
