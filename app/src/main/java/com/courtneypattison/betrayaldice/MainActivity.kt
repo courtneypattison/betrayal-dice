@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.player0ScorePrev.observe(this, Observer<Int> { scorePrev ->
             player0ScorePrevTextView.text = scorePrev.toString()
-            fadeIn(player0ScorePrevTextView)
+            fadeIn(player0ScorePrevTextView, .5f)
         })
 
         viewModel.player1Score.observe(this, Observer<Int> { score ->
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.player1ScorePrev.observe(this, Observer<Int> { scorePrev ->
             player1ScorePrevTextView.text = scorePrev.toString()
-            fadeIn(player1ScorePrevTextView)
+            fadeIn(player1ScorePrevTextView, .5f)
         })
     }
 
@@ -267,9 +267,9 @@ class MainActivity : AppCompatActivity() {
 
     /** Visibility functions **/
 
-    private fun fadeIn(view: View, delay: Long = 0, length: Long = 1000) {
+    private fun fadeIn(view: View, to: Float = 1f, delay: Long = 0, length: Long = 1000) {
         show(view)
-        ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).apply {
+        ObjectAnimator.ofFloat(view, "alpha", 0f, to).apply {
             duration = length
             startDelay = delay
             start()

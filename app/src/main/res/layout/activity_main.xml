@@ -193,6 +193,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:alpha=".5"
         app:layout_constraintBottom_toBottomOf="@+id/player0ScoreTextView"
         app:layout_constraintEnd_toStartOf="@+id/player0ScoreTextView"
         app:layout_constraintTop_toTopOf="@+id/player0ScoreTextView" />
@@ -202,6 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:alpha=".5"
         app:layout_constraintBottom_toBottomOf="@+id/player1ScoreTextView"
         app:layout_constraintStart_toEndOf="@+id/player1ScoreTextView"
         app:layout_constraintTop_toTopOf="@+id/player1ScoreTextView" />
