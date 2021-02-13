@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
         this.setNumberPickerValues(player0NumberPicker, 0)
         this.setNumberPickerValues(player1NumberPicker, 1)
 
+        rollOutcomeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                show(outcomeTableLayout)
+            } else {
+                hide(outcomeTableLayout)
+            }
+        }
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.eventHaunt.observe(this, Observer<Boolean> { eventHaunt ->
@@ -102,6 +110,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun onNewGameConfirm() {
         viewModel.onNewGame()
+        player0NumberPicker.value = 1
+        player1NumberPicker.value = 1
 
         hideDamage()
 
@@ -227,6 +237,8 @@ class MainActivity : AppCompatActivity() {
         setButtonColor(attackButton, color, colorStateListID)
         setButtonColor(newGameButton, color, colorStateListID)
         setButtonColor(rollDiceButton, color, colorStateListID)
+        rollOutcomeSwitch.thumbTintList = getColorStateList(colorStateListID)
+        rollOutcomeSwitch.trackTintList = getColorStateList(colorStateListID)
     }
 
     /**
