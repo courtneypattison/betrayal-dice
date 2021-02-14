@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
 
         alertDialogTheme = R.style.MaterialAlertDialogCustom
         setAllButtonColors(getColor(R.color.colorPrimary), R.color.button_primary)
+        setSwitchColor(R.color.switch_primary);
 
         show(hauntRollButton)
         show(omenCardCountTextView)
@@ -209,6 +210,7 @@ class MainActivity : AppCompatActivity() {
         alertDialogTheme = R.style.MaterialAlertDialogHaunt
 
         setAllButtonColors(getColor(R.color.colorSecondary), R.color.button_secondary)
+        setSwitchColor(R.color.switch_secondary);
     }
 
     /**
@@ -237,6 +239,12 @@ class MainActivity : AppCompatActivity() {
         setButtonColor(attackButton, color, colorStateListID)
         setButtonColor(newGameButton, color, colorStateListID)
         setButtonColor(rollDiceButton, color, colorStateListID)
+    }
+
+    /**
+     * Changes switch color
+     */
+    private fun setSwitchColor(colorStateListID: Int) {
         rollOutcomeSwitch.thumbTintList = getColorStateList(colorStateListID)
         rollOutcomeSwitch.trackTintList = getColorStateList(colorStateListID)
     }
