@@ -4,6 +4,5 @@
     <color name="colorPrimary">#3EA178</color>
     <color name="colorPrimaryDark">#06372C</color>
     <color name="colorPrimaryFocused">#123EA178</color>
-    <color name="colorSecondary">#b71c1c</color>
-    <color name="colorSecondaryDark">#7f0000</color>
+    <color name="colorSecondary">#E53935</color>
 </resources>
