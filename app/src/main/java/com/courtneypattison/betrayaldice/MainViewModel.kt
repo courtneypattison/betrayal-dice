@@ -131,14 +131,14 @@ class MainViewModel : ViewModel() {
         _eventTie.value = false
         _isHaunt.value = false
         _omenCardCount.value = 0
-        _player0Damage.value = 0
-        _player1Damage.value = 0
+        _player0Damage.value = null
+        _player1Damage.value = null
         _player0DieCount.value = 1
         player1DieCount.value = 1
-        _player0Score.value = 0
-        _player0ScorePrev.value = 0
-        _player1Score.value = 0
-        _player1ScorePrev.value = 0
+        _player0Score.value = null
+        _player0ScorePrev.value = null
+        _player1Score.value = null
+        _player1ScorePrev.value = null
     }
 
     private fun rollDie(): Int {

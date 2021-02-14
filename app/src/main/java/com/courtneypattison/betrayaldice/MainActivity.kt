@@ -53,11 +53,19 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.player0Damage.observe(this, Observer<Int> { damage ->
-            updateDamage(player0DamageTextView, damage)
+            if (damage != null) {
+                updateDamage(player0DamageTextView, damage)
+            } else {
+                hide(player0DamageTextView)
+            }
         })
 
         viewModel.player1Damage.observe(this, Observer<Int> { damage ->
-            updateDamage(player1DamageTextView, damage)
+            if (damage != null) {
+                updateDamage(player1DamageTextView, damage)
+            } else {
+                hide(player1DamageTextView)
+            }
         })
 
         viewModel.player0DieCount.observe(this, Observer<Int> { dieCount ->
@@ -66,23 +74,39 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.player0Score.observe(this, Observer<Int> { score ->
-            player0ScoreTextView.text = score.toString()
-            fadeIn(player0ScoreTextView)
+            if (score != null) {
+                player0ScoreTextView.text = score.toString()
+                fadeIn(player0ScoreTextView)
+            } else {
+                hide(player0ScoreTextView)
+            }
         })
 
         viewModel.player0ScorePrev.observe(this, Observer<Int> { scorePrev ->
-            player0ScorePrevTextView.text = scorePrev.toString()
-            fadeIn(player0ScorePrevTextView, .5f)
+            if (scorePrev != null) {
+                player0ScorePrevTextView.text = scorePrev.toString()
+                fadeIn(player0ScorePrevTextView, .5f)
+            } else {
+                hide(player0ScorePrevTextView)
+            }
         })
 
         viewModel.player1Score.observe(this, Observer<Int> { score ->
-            player1ScoreTextView.text = score.toString()
-            fadeIn(player1ScoreTextView)
+            if (score != null) {
+                player1ScoreTextView.text = score.toString()
+                fadeIn(player1ScoreTextView)
+            } else {
+                hide(player1ScoreTextView)
+            }
         })
 
         viewModel.player1ScorePrev.observe(this, Observer<Int> { scorePrev ->
-            player1ScorePrevTextView.text = scorePrev.toString()
-            fadeIn(player1ScorePrevTextView, .5f)
+            if (scorePrev != null) {
+                player1ScorePrevTextView.text = scorePrev.toString()
+                fadeIn(player1ScorePrevTextView, .5f)
+            } else {
+                hide(player1ScorePrevTextView)
+            }
         })
     }
 

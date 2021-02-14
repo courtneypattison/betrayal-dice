@@ -15,20 +15,19 @@
         android:onClick="onRollDice"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="@string/zero"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
         app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <NumberPicker
         android:id="@+id/player0NumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="28dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rollDiceButton" />
-
+        app:layout_constraintTop_toBottomOf="@+id/firstPlayerDieCountTextView" />
 
     <TextView
         android:id="@+id/player1ScoreTextView"
@@ -39,7 +38,6 @@
         android:onClick="onAttack"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="@string/zero"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/player1NumberPicker"
         app:layout_constraintStart_toStartOf="@+id/player1NumberPicker"
@@ -49,9 +47,9 @@
         android:id="@+id/player1NumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attackButton" />
+        app:layout_constraintTop_toBottomOf="@+id/attackPlayerDieCountTextView" />
 
     <TextView
         android:id="@+id/tieTextView"
@@ -143,8 +141,8 @@
         android:onClick="onRollDice"
         android:text="@string/roll"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
-        app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
+        app:layout_constraintEnd_toEndOf="@+id/firstPlayerDieCountTextView"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerDieCountTextView"
         app:layout_constraintTop_toBottomOf="@+id/player0ScoreTextView" />
 
     <Button
@@ -175,7 +173,8 @@
         <TableLayout
             android:id="@+id/outcomeTableLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="invisible">
 
             <TableRow
                 android:id="@+id/outcomeTableRow"
@@ -214,7 +213,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
-        android:checked="true"
+        android:checked="false"
         android:fontFamily="@font/piedra"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -228,6 +227,28 @@
         android:text="@string/roll_outcome_probabilities"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/firstPlayerDieCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="92dp"
+        android:gravity="center"
+        android:text="@string/die_count_current_player"
+        app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
+        app:layout_constraintTop_toBottomOf="@+id/rollDiceButton" />
+
+    <TextView
+        android:id="@+id/attackPlayerDieCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="92dp"
+        android:gravity="center"
+        android:text="@string/die_count_attack_player"
+        app:layout_constraintEnd_toEndOf="@+id/player1NumberPicker"
+        app:layout_constraintStart_toStartOf="@+id/player1NumberPicker"
+        app:layout_constraintTop_toBottomOf="@+id/attackButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
