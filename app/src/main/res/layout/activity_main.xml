@@ -25,8 +25,8 @@
         android:id="@+id/player0NumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/firstPlayerDieCountTextView"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerDieCountTextView"
         app:layout_constraintTop_toBottomOf="@+id/firstPlayerDieCountTextView" />
 
     <TextView
@@ -47,8 +47,8 @@
         android:id="@+id/player1NumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/attackPlayerDieCountTextView"
+        app:layout_constraintStart_toStartOf="@+id/attackPlayerDieCountTextView"
         app:layout_constraintTop_toBottomOf="@+id/attackPlayerDieCountTextView" />
 
     <TextView
@@ -232,22 +232,22 @@
         android:id="@+id/firstPlayerDieCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:width="92dp"
+        android:layout_marginStart="12dp"
+        android:width="95dp"
         android:gravity="center"
         android:text="@string/die_count_current_player"
-        app:layout_constraintEnd_toEndOf="@+id/player0NumberPicker"
-        app:layout_constraintStart_toStartOf="@+id/player0NumberPicker"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rollDiceButton" />
 
     <TextView
         android:id="@+id/attackPlayerDieCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:width="92dp"
+        android:layout_marginEnd="12dp"
+        android:width="95dp"
         android:gravity="center"
         android:text="@string/die_count_attack_player"
-        app:layout_constraintEnd_toEndOf="@+id/player1NumberPicker"
-        app:layout_constraintStart_toStartOf="@+id/player1NumberPicker"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/attackButton" />
 
 
