@@ -1,8 +1,10 @@
 package com.courtneypattison.betrayaldice
 
 import android.animation.ObjectAnimator
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
@@ -21,6 +23,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // TODO Group and hide as one view
+            hide(RollOutcomeProbabilitiesTextView)
+            hide(rollOutcomeSwitch)
+            hide(horizontalScrollView)
+        } else {
+            show(RollOutcomeProbabilitiesTextView)
+            show(rollOutcomeSwitch)
+            show(horizontalScrollView)
+        }
 
         this.setNumberPickerValues(player0NumberPicker, 0)
         this.setNumberPickerValues(player1NumberPicker, 1)
@@ -149,6 +164,8 @@ class MainActivity : AppCompatActivity() {
 
     fun onRollDice(view: View) {
         hideDamage()
+        hide(player1ScoreTextView)
+        hide(player1ScorePrevTextView)
         viewModel.onRollDice()
     }
 
@@ -221,7 +238,10 @@ class MainActivity : AppCompatActivity() {
     private fun setNumberPickerValues(numberPicker: NumberPicker, playerNumber: Int) {
         numberPicker.maxValue = 8
         numberPicker.minValue = 1
-        numberPicker.setOnValueChangedListener {_, _, newDieCount -> viewModel.setDieCount(playerNumber, newDieCount)}
+        numberPicker.setOnValueChangedListener { _, _, newDieCount -> viewModel.setDieCount(
+            playerNumber,
+            newDieCount
+        )}
     }
 
     /**
