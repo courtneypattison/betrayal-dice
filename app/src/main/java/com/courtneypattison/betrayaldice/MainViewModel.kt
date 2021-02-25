@@ -18,6 +18,11 @@ class MainViewModel : ViewModel() {
     val eventTie: LiveData<Boolean>
         get() = _eventTie
 
+    // Result of haunt roll
+    private var _hauntRollResult = MutableLiveData<Int>()
+    val hauntRollResult: LiveData<Int>
+        get() = _hauntRollResult
+
     // If it is currently the haunt
     private var _isHaunt = MutableLiveData<Boolean>()
     val isHaunt: LiveData<Boolean>
@@ -102,8 +107,15 @@ class MainViewModel : ViewModel() {
         updateDamage()
     }
 
-    fun onHauntRoll() {
-        if (rollNDice(6) < _omenCardCount.value!!) beginHaunt() else incrementOmenCardCount()
+    fun onHauntRoll(hauntRollType: Int) {
+        when (hauntRollType) {
+            0 -> hauntRollOriginal()
+            1 -> hauntRollLegacy()
+            2 -> hauntRollUnofficial()
+        }
+        if (!_isHaunt.value!!) {
+            incrementOmenCardCount()
+        }
     }
 
     fun onNewGame() {
@@ -120,6 +132,28 @@ class MainViewModel : ViewModel() {
     private fun beginHaunt() {
         _eventHaunt.value = true
         _isHaunt.value = true
+    }
+
+    private fun hauntRollLegacy() {
+        hauntRollNewRules(6)
+    }
+
+    private fun hauntRollOriginal() {
+        _hauntRollResult.value = rollNDice(6)
+        if (_hauntRollResult.value!! < _omenCardCount.value!!) {
+            beginHaunt()
+        }
+    }
+
+    private fun hauntRollNewRules(n: Int) {
+        _hauntRollResult.value = rollNDice(_omenCardCount.value!!)
+        if (_hauntRollResult.value!! >= n) {
+            beginHaunt()
+        }
+    }
+
+    private fun hauntRollUnofficial() {
+        hauntRollNewRules(7)
     }
 
     private fun incrementOmenCardCount() {

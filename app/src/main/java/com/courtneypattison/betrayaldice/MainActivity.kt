@@ -1,6 +1,9 @@
 package com.courtneypattison.betrayaldice
 
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -18,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var sharedPreferences: SharedPreferences
     private var alertDialogTheme = R.style.MaterialAlertDialogCustom
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.eventHaunt.observe(this, Observer<Boolean> { eventHaunt ->
@@ -133,7 +138,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onHauntRoll(view: View) {
-        viewModel.onHauntRoll()
+        viewModel.onHauntRoll(getHauntRollType())
     }
 
     fun onNewGame(view: View) {
@@ -160,6 +165,7 @@ class MainActivity : AppCompatActivity() {
 
         show(hauntRollButton)
         show(omenCardCountTextView)
+        show(settingsButton)
     }
 
     fun onRollDice(view: View) {
@@ -167,6 +173,25 @@ class MainActivity : AppCompatActivity() {
         hide(player1ScoreTextView)
         hide(player1ScorePrevTextView)
         viewModel.onRollDice()
+    }
+
+    fun onSettings(view: View) {
+        val hauntRollType = getHauntRollType()
+        MaterialAlertDialogBuilder(this, alertDialogTheme)
+            .setTitle(getString(R.string.haunt_roll_settings))
+            .setSingleChoiceItems(R.array.haunt_roll_types,
+                hauntRollType,
+                DialogInterface.OnClickListener { _, which ->
+                    with (sharedPreferences.edit()) {
+                        putInt(getString(R.string.haunt_roll_key), which)
+                        apply()
+                    }
+            })
+            .setCancelable(true)
+            .setPositiveButton(getString(R.string.save)) { _, _ -> onNewGameConfirm() }
+            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
+            .create()
+            .show()
     }
 
     /**
@@ -250,6 +275,7 @@ class MainActivity : AppCompatActivity() {
     private fun styleHaunt() {
         hide(hauntRollButton)
         hide(omenCardCountTextView)
+        hide(settingsButton)
 
         alertDialogTheme = R.style.MaterialAlertDialogHaunt
 
@@ -266,6 +292,29 @@ class MainActivity : AppCompatActivity() {
         showHauntBegins()
 
         viewModel.beginHauntComplete()
+    }
+
+    /**
+     * Gets the haunt roll message
+     */
+    private fun getHauntRollMessage(s: String): String {
+        val dieCount = when (getHauntRollType()) {
+            resources.getInteger(R.integer.haunt_roll_original) -> 6
+            resources.getInteger(R.integer.haunt_roll_legacy), resources.getInteger(R.integer.haunt_roll_unofficial) -> viewModel.omenCardCount.value
+            else -> resources.getInteger(R.integer.haunt_roll_default_key)
+        }
+        return "Number of dice rolled: $dieCount\nResult: ${viewModel.hauntRollResult.value}\n$s"
+    }
+
+    /**
+     * Gets the haunt roll type from shared preferences or sets a default
+     */
+    private fun getHauntRollType(): Int {
+        return if (sharedPreferences.contains(getString(R.string.haunt_roll_key))) {
+            sharedPreferences.getInt(getString(R.string.haunt_roll_key), R.integer.haunt_roll_default_key)
+        } else {
+            resources.getInteger(R.integer.haunt_roll_default_key)
+        }
     }
 
     /**
@@ -299,7 +348,7 @@ class MainActivity : AppCompatActivity() {
     private fun showHauntBegins() {
         MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogHaunt)
             .setTitle(getString(R.string.haunt_roll))
-            .setMessage(getString(R.string.haunt_begins))
+            .setMessage(getHauntRollMessage(getString(R.string.haunt_begins)))
             .setPositiveButton(getString(R.string.continue_please)) { _, _ -> }
             .create()
             .show()
@@ -311,7 +360,7 @@ class MainActivity : AppCompatActivity() {
     private fun showNoHaunt() {
         MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.haunt_roll))
-            .setMessage(getString(R.string.no_haunt))
+            .setMessage(getHauntRollMessage(getString(R.string.no_haunt)))
             .setPositiveButton(getString(R.string.continue_please)) { _, _ -> }
             .create()
             .show()

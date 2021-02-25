@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="haunt_roll_default_key">0</integer>
+    <integer name="haunt_roll_original">0</integer>
+    <integer name="haunt_roll_legacy">1</integer>
+    <integer name="haunt_roll_unofficial">2</integer>
+</resources>

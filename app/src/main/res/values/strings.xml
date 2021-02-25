@@ -10,6 +10,8 @@
     <string name="haunt_begins">The haunt begins…</string>
     <string name="haunt_roll">Haunt Roll</string>
     <string name="haunt_roll_button">Haunt roll button</string>
+    <string name="haunt_roll_key">Haunt Roll Type</string>
+    <string name="haunt_roll_settings">Haunt Roll Settings</string>
     <string name="new_game">New Game</string>
     <string name="new_game_message">Are you sure you want to start a new game?</string>
     <string name="no_haunt">No haunt yet…</string>
@@ -21,5 +23,7 @@
     <string name="player_1_selector">Player 1 die count selector</string>
     <string name="roll">Roll</string>
     <string name="roll_outcome_probabilities">Roll Outcome Probabilities</string>
+    <string name="save">Save</string>
+    <string name="settings">Settings</string>
     <string name="zero">0</string>
 </resources>
