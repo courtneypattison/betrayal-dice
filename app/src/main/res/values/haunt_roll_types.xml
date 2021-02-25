@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="haunt_roll_types">
+        <item name="original">Original: <font face="sans_serif"><small>roll 6 dice. Haunt begins if less than omen card count. Haunt may start early.</small></font></item>
+        <item name="legacy">Legacy: <font face="sans_serif"><small>roll dice = omen card count. Haunt begins if 6+. Never haunt on first 2 rolls.</small></font></item>
+        <item name="unofficial">Unofficial: <font face="sans_serif"><small>roll dice = omen card count. Haunt begins if 7+. Never haunt on first 3 rolls.</small></font></item>
+    </string-array>
+</resources>
