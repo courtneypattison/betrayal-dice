@@ -164,6 +164,7 @@ class MainActivity : AppCompatActivity() {
         setSwitchColor(R.color.switch_primary);
 
         show(hauntRollButton)
+        show(hauntRollTextButton)
         show(omenCardCountTextView)
         show(settingsButton)
     }
@@ -274,6 +275,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun styleHaunt() {
         hide(hauntRollButton)
+        hide(hauntRollTextButton)
         hide(omenCardCountTextView)
         hide(settingsButton)
 
@@ -300,7 +302,7 @@ class MainActivity : AppCompatActivity() {
     private fun getHauntRollMessage(s: String): String {
         val dieCount = when (getHauntRollType()) {
             resources.getInteger(R.integer.haunt_roll_original) -> 6
-            resources.getInteger(R.integer.haunt_roll_legacy), resources.getInteger(R.integer.haunt_roll_unofficial) -> viewModel.omenCardCount.value
+            resources.getInteger(R.integer.haunt_roll_legacy), resources.getInteger(R.integer.haunt_roll_unofficial) -> getOmenCardCount()
             else -> resources.getInteger(R.integer.haunt_roll_default_key)
         }
         return "Number of dice rolled: $dieCount\nResult: ${viewModel.hauntRollResult.value}\n$s"
@@ -314,6 +316,17 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.getInt(getString(R.string.haunt_roll_key), R.integer.haunt_roll_default_key)
         } else {
             resources.getInteger(R.integer.haunt_roll_default_key)
+        }
+    }
+
+    /**
+     * Gets omen card count depending on if haunt or not
+     */
+    private fun getOmenCardCount(): Int? {
+        return if (viewModel.eventHaunt.value!!) {
+            viewModel.omenCardCount.value?.plus(1)
+        } else {
+            viewModel.omenCardCount.value
         }
     }
 
