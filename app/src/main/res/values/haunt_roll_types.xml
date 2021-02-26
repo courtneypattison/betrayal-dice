@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="haunt_roll_types">
-        <item name="original">Original: <font face="sans_serif"><small>roll 6 dice. Haunt begins if less than omen card count. Haunt may start early.</small></font></item>
-        <item name="legacy">Legacy: <font face="sans_serif"><small>roll dice = omen card count. Haunt begins if 6+. Never haunt on first 2 rolls.</small></font></item>
-        <item name="unofficial">Unofficial: <font face="sans_serif"><small>roll dice = omen card count. Haunt begins if 7+. Never haunt on first 3 rolls.</small></font></item>
+        <item name="original">\nOriginal <font face="sans_serif"><small>Roll 6 dice. If result is less than omen card count, the haunt begins. Haunt may start early.</small></font></item>
+        <item name="legacy">\nLegacy <font face="sans_serif"><small>Roll dice equal to omen card count. If result is 6+, the haunt begins. Never haunt on first 2 rolls, but more likely to get haunt on 3rd or 4th roll.</small></font></item>
+        <item name="unofficial">\nUnofficial <font face="sans_serif"><small>Roll dice equal to omen card count. If result is 7+, the haunt begins. Never haunt on first 3 rolls, otherwise roll probabilities similar to Original rules.</small></font></item>
     </string-array>
 </resources>
