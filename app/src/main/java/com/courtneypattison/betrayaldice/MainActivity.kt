@@ -31,14 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         val orientation = resources.configuration.orientation
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // TODO Group and hide as one view
-            hide(RollOutcomeProbabilitiesTextView)
-            hide(rollOutcomeSwitch)
-            hide(horizontalScrollView)
+            hide(optionsConstraintLayout)
         } else {
-            show(RollOutcomeProbabilitiesTextView)
-            show(rollOutcomeSwitch)
-            show(horizontalScrollView)
+            show(optionsConstraintLayout)
         }
 
         this.setNumberPickerValues(player0NumberPicker, 0)
@@ -352,6 +347,8 @@ class MainActivity : AppCompatActivity() {
      * Changes switch color
      */
     private fun setSwitchColor(colorStateListID: Int) {
+        diceValuesSwitch.thumbTintList = getColorStateList(colorStateListID)
+        diceValuesSwitch.trackTintList = getColorStateList(colorStateListID)
         rollOutcomeSwitch.thumbTintList = getColorStateList(colorStateListID)
         rollOutcomeSwitch.trackTintList = getColorStateList(colorStateListID)
     }
