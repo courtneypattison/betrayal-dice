@@ -69,22 +69,21 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.omenCardCount.observe(this, Observer<Int> { omenCardCount ->
             omenCardCountTextView.text = omenCardCount.toString()
-            if (unsuccessfulHauntRoll()) showNoHaunt()
         })
 
-        viewModel.player0Damage.observe(this, Observer<Int> { damage ->
-            if (damage != null) {
-                updateDamage(player0DamageTextView, damage)
-            } else {
+        viewModel.player0Damage.observe(this, Observer<Int?> { damage ->
+            if (damage == null) {
                 hide(player0DamageTextView)
+            } else {
+                updateDamage(player0DamageTextView, damage)
             }
         })
 
-        viewModel.player1Damage.observe(this, Observer<Int> { damage ->
-            if (damage != null) {
-                updateDamage(player1DamageTextView, damage)
-            } else {
+        viewModel.player1Damage.observe(this, Observer<Int?> { damage ->
+            if (damage == null) {
                 hide(player1DamageTextView)
+            } else {
+                updateDamage(player1DamageTextView, damage)
             }
         })
 
@@ -93,39 +92,40 @@ class MainActivity : AppCompatActivity() {
             addOutcomeProbabilities(dieCount)
         })
 
-        viewModel.player0Score.observe(this, Observer<Int> { score ->
-            if (score != null) {
+        viewModel.player0Score.observe(this, Observer<Int?> { score ->
+            if (score == null) {
+                hide(player0ScoreTextView)
+            } else {
                 player0ScoreTextView.text = score.toString()
                 fadeIn(player0ScoreTextView)
-            } else {
-                hide(player0ScoreTextView)
             }
         })
 
-        viewModel.player0ScorePrev.observe(this, Observer<Int> { scorePrev ->
-            if (scorePrev != null) {
+        viewModel.player0ScorePrev.observe(this, Observer<Int?> { scorePrev ->
+            if (scorePrev == null) {
+                hide(player0ScorePrevTextView)
+            } else {
                 player0ScorePrevTextView.text = scorePrev.toString()
                 fadeIn(player0ScorePrevTextView, .5f)
-            } else {
-                hide(player0ScorePrevTextView)
+
             }
         })
 
-        viewModel.player1Score.observe(this, Observer<Int> { score ->
-            if (score != null) {
+        viewModel.player1Score.observe(this, Observer<Int?> { score ->
+            if (score == null) {
+                hide(player1ScoreTextView)
+            } else {
                 player1ScoreTextView.text = score.toString()
                 fadeIn(player1ScoreTextView)
-            } else {
-                hide(player1ScoreTextView)
             }
         })
 
-        viewModel.player1ScorePrev.observe(this, Observer<Int> { scorePrev ->
-            if (scorePrev != null) {
+        viewModel.player1ScorePrev.observe(this, Observer<Int?> { scorePrev ->
+            if (scorePrev == null) {
+                hide(player1ScorePrevTextView)
+            } else {
                 player1ScorePrevTextView.text = scorePrev.toString()
                 fadeIn(player1ScorePrevTextView, .5f)
-            } else {
-                hide(player1ScorePrevTextView)
             }
         })
     }
@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onHauntRoll(view: View) {
         viewModel.onHauntRoll(getHauntRollType())
+        if (unsuccessfulHauntRoll()) showNoHaunt()
     }
 
     fun onNewGame(view: View) {

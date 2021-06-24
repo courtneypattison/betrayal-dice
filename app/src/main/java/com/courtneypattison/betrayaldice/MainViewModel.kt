@@ -108,13 +108,11 @@ class MainViewModel : ViewModel() {
     }
 
     fun onHauntRoll(hauntRollType: Int) {
+        incrementOmenCardCount()
         when (hauntRollType) {
             0 -> hauntRollOriginal()
             1 -> hauntRollLegacy()
             2 -> hauntRollUnofficial()
-        }
-        if (!_isHaunt.value!!) {
-            incrementOmenCardCount()
         }
     }
 
