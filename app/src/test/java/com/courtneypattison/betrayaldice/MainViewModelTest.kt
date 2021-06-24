@@ -44,7 +44,7 @@ class MainViewModelTest {
 
     @Test
     fun onHauntRoll_BeginHauntOrIncrementOmenCardCount() {
-        mainViewModel.onHauntRoll()
+        mainViewModel.onHauntRoll(0)
         val omenCardCount = mainViewModel.omenCardCount.getOrAwaitValue()
         val isHaunt = mainViewModel.isHaunt.getOrAwaitValue()
         if (isHaunt) {
@@ -56,7 +56,7 @@ class MainViewModelTest {
 
     @Test
     fun onNewGame_setDefaultValues() {
-        mainViewModel.onHauntRoll()
+        mainViewModel.onHauntRoll(0)
         var omenCardCount = mainViewModel.omenCardCount.getOrAwaitValue()
         assertThat(omenCardCount).isEqualTo(1)
         mainViewModel.onNewGame()
