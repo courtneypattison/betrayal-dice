@@ -40,11 +40,10 @@ class MainActivity : AppCompatActivity() {
         this.setNumberPickerValues(player1NumberPicker, 1)
 
         rollOutcomeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                show(outcomeTableLayout)
-            } else {
-                hide(outcomeTableLayout)
-            }
+            if (isChecked) show(outcomeTableLayout) else hide(outcomeTableLayout)
+        }
+        diceValuesSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) show(diceValuesConstraintLayout) else hide(diceValuesConstraintLayout)
         }
 
         sharedPreferences = getPreferences(Context.MODE_PRIVATE)
@@ -123,6 +122,24 @@ class MainActivity : AppCompatActivity() {
                 fadeIn(player1ScorePrevTextView, .5f)
             }
         })
+
+        viewModel.rollDiceValues.observe(this, Observer<String?> { diceValues ->
+            rollValuesTextView.text = getString(R.string.dice_values_message)
+            if (diceValues == null) {
+                rollValuesTextView.text = getString(R.string.dice_values_message)
+            } else {
+                rollValuesTextView.text = getString(R.string.dice_values_roll, diceValues)
+            }
+        })
+
+        viewModel.attackDiceValues.observe(this, Observer<String?> { diceValues ->
+            if (diceValues == null) {
+                hide(attackValuesTextView)
+            } else {
+                attackValuesTextView.text = getString(R.string.dice_values_attack, diceValues)
+                show(attackValuesTextView)
+            }
+        })
     }
 
     /** onClick methods **/
@@ -169,6 +186,7 @@ class MainActivity : AppCompatActivity() {
         hideDamage()
         hide(player1ScoreTextView)
         hide(player1ScorePrevTextView)
+        hide(attackValuesTextView)
         viewModel.onRollDice()
     }
 
@@ -295,13 +313,14 @@ class MainActivity : AppCompatActivity() {
     /**
      * Gets the haunt roll message
      */
-    private fun getHauntRollMessage(s: String): String {
+    private fun getHauntRollMessage(is_haunt_message: String): String {
         val dieCount = when (getHauntRollType()) {
             resources.getInteger(R.integer.haunt_roll_original) -> 6
             resources.getInteger(R.integer.haunt_roll_legacy), resources.getInteger(R.integer.haunt_roll_unofficial) -> getOmenCardCount()
             else -> resources.getInteger(R.integer.haunt_roll_default_key)
         }
-        return "Number of dice rolled: $dieCount\nResult: ${viewModel.hauntRollResult.value}\n$s"
+        return getString(R.string.haunt_roll_message, is_haunt_message, viewModel.hauntRollResult.value, dieCount, viewModel.hauntRollDiceValues.value)
+
     }
 
     /**

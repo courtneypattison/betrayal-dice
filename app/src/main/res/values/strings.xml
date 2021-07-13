@@ -4,6 +4,10 @@
     <string name="cancel">Cancel</string>
     <string name="continue_please">Continue</string>
     <string name="dice_values">Dice Values</string>
+    <string name="dice_values_attack">Attack: %1$s</string>
+    <string name="dice_values_haunt_roll">Dice values: %1$s</string>
+    <string name="dice_values_message">Roll or attack to see dice values</string>
+    <string name="dice_values_roll">Roll: %1$s</string>
     <string name="die_count_current_player">Current Player Die Count</string>
     <string name="die_count_attack_player">Attack Player Die Count</string>
     <string name="divider">Divides scores from buttons</string>
@@ -12,6 +16,7 @@
     <string name="haunt_roll">Haunt Roll</string>
     <string name="haunt_roll_button">Haunt roll button</string>
     <string name="haunt_roll_key">Haunt Roll Type</string>
+    <string name="haunt_roll_message">"%1$s\nResult: %2$d\nNumber of dice rolled: %3$d\nDice values: %4$s"</string>
     <string name="haunt_roll_settings">Haunt Roll Settings</string>
     <string name="new_game">New Game</string>
     <string name="new_game_message">Are you sure you want to start a new game?</string>

@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
 
+enum class RollType {
+    ROLL, ATTACK, HAUNT
+}
 
 class MainViewModel : ViewModel() {
 
@@ -34,13 +37,13 @@ class MainViewModel : ViewModel() {
         get() = _omenCardCount
 
     // The amount of damage player 0 sustains
-    private var _player0Damage = MutableLiveData<Int>()
-    val player0Damage: LiveData<Int>
+    private var _player0Damage = MutableLiveData<Int?>()
+    val player0Damage: LiveData<Int?>
         get() = _player0Damage
 
     // The amount of damage player 1 sustains
-    private var _player1Damage = MutableLiveData<Int>()
-    val player1Damage: LiveData<Int>
+    private var _player1Damage = MutableLiveData<Int?>()
+    val player1Damage: LiveData<Int?>
         get() = _player1Damage
 
     // The number of dice player 0 will roll
@@ -52,24 +55,39 @@ class MainViewModel : ViewModel() {
     private var player1DieCount = MutableLiveData<Int>()
 
     // Score from roll for player 0
-    private var _player0Score = MutableLiveData<Int>()
-    val player0Score: LiveData<Int>
+    private var _player0Score = MutableLiveData<Int?>()
+    val player0Score: LiveData<Int?>
         get() = _player0Score
 
     // Score from previous roll for player 0
-    private var _player0ScorePrev = MutableLiveData<Int>()
-    val player0ScorePrev: LiveData<Int>
+    private var _player0ScorePrev = MutableLiveData<Int?>()
+    val player0ScorePrev: LiveData<Int?>
         get() = _player0ScorePrev
 
     // Score from roll for player 1
-    private var _player1Score = MutableLiveData<Int>()
-    val player1Score: LiveData<Int>
+    private var _player1Score = MutableLiveData<Int?>()
+    val player1Score: LiveData<Int?>
         get() = _player1Score
 
     // Score from previous roll for player 1
-    private var _player1ScorePrev = MutableLiveData<Int>()
-    val player1ScorePrev: LiveData<Int>
+    private var _player1ScorePrev = MutableLiveData<Int?>()
+    val player1ScorePrev: LiveData<Int?>
         get() = _player1ScorePrev
+
+    // Values of each die rolled for player 0
+    private var _rollDiceValues = MutableLiveData<String>()
+    val rollDiceValues: LiveData<String>
+        get() = _rollDiceValues
+
+    // Values of each die rolled for player 1
+    private var _attackDiceValues = MutableLiveData<String?>()
+    val attackDiceValues: LiveData<String?>
+        get() = _attackDiceValues
+
+    // Values of each die rolled for haunt roll
+    private var _hauntRollDiceValues = MutableLiveData<String?>()
+    val hauntRollDiceValues: LiveData<String?>
+        get() = _hauntRollDiceValues
 
     val outcomeProbabilities = arrayOf(
         intArrayOf(0),
@@ -101,8 +119,8 @@ class MainViewModel : ViewModel() {
         _player0ScorePrev.value = _player0Score.value
         _player1ScorePrev.value = _player1Score.value
 
-        _player0Score.value = rollNDice(player0DieCount.value!!)
-        _player1Score.value = rollNDice(player1DieCount.value!!)
+        _player0Score.value = rollNDice(player0DieCount.value!!, RollType.ROLL)
+        _player1Score.value = rollNDice(player1DieCount.value!!, RollType.ATTACK)
 
         updateDamage()
     }
@@ -122,7 +140,7 @@ class MainViewModel : ViewModel() {
 
     fun onRollDice() {
         _player0ScorePrev.value = _player0Score.value
-        _player0Score.value = rollNDice(player0DieCount.value!!)
+        _player0Score.value = rollNDice(player0DieCount.value!!, RollType.ROLL)
     }
 
     /** Private methods **/
@@ -137,14 +155,14 @@ class MainViewModel : ViewModel() {
     }
 
     private fun hauntRollOriginal() {
-        _hauntRollResult.value = rollNDice(6)
+        _hauntRollResult.value = rollNDice(6, RollType.HAUNT)
         if (_hauntRollResult.value!! < _omenCardCount.value!!) {
             beginHaunt()
         }
     }
 
     private fun hauntRollNewRules(n: Int) {
-        _hauntRollResult.value = rollNDice(_omenCardCount.value!!)
+        _hauntRollResult.value = rollNDice(_omenCardCount.value!!, RollType.HAUNT)
         if (_hauntRollResult.value!! >= n) {
             beginHaunt()
         }
@@ -171,17 +189,31 @@ class MainViewModel : ViewModel() {
         _player0ScorePrev.value = null
         _player1Score.value = null
         _player1ScorePrev.value = null
+        _rollDiceValues.value = null
+        _attackDiceValues.value = null
+        _hauntRollDiceValues.value = null
     }
 
     private fun rollDie(): Int {
         return Random.nextInt(3)
     }
 
-    private fun rollNDice(n: Int): Int {
+    private fun rollNDice(n: Int, rollType: RollType): Int {
         var sum = 0
+        val builder = StringBuilder()
+
         for (i in 1..n) {
-            sum += rollDie()
+            val num = rollDie()
+            sum += num
+            builder.append(num).append(" ")
         }
+
+        when (rollType) {
+            RollType.ROLL -> _rollDiceValues.value = builder.toString()
+            RollType.ATTACK -> _attackDiceValues.value = builder.toString()
+            RollType.HAUNT -> _hauntRollDiceValues.value = builder.toString()
+        }
+
         return sum
     }
 
