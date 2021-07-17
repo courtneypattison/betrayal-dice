@@ -4,10 +4,10 @@
     <string name="cancel">Cancel</string>
     <string name="continue_please">Continue</string>
     <string name="dice_values">Dice Values</string>
-    <string name="dice_values_attack">Attack: %1$s</string>
+    <string name="dice_values_attack">Attack\n%1$s</string>
     <string name="dice_values_haunt_roll">Dice values: %1$s</string>
     <string name="dice_values_message">Roll or attack to see dice values</string>
-    <string name="dice_values_roll">Roll: %1$s</string>
+    <string name="dice_values_roll">Roll\n%1$s</string>
     <string name="die_count_current_player">Current Player Die Count</string>
     <string name="die_count_attack_player">Attack Player Die Count</string>
     <string name="divider">Divides scores from buttons</string>
