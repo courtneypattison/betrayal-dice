@@ -225,8 +225,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/optionsConstraintLayout"
-        android:layout_width="416dp"
-        android:layout_height="260dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:padding="12dp"
         app:layout_constraintBottom_toTopOf="@+id/newGameButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -306,8 +306,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/diceValuesConstraintLayout"
-            android:layout_width="393dp"
-            android:layout_height="135dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -330,25 +330,13 @@
                 android:id="@+id/attackValuesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rollValuesTextView" />
+                android:textAlignment="viewEnd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/diceValuesLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical"
-            android:paddingStart="2dp"
-            android:paddingEnd="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diceValuesTextView">
-
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
