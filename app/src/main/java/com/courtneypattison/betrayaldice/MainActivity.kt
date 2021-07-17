@@ -173,6 +173,8 @@ class MainActivity : AppCompatActivity() {
         hideDamage()
 
         alertDialogTheme = R.style.MaterialAlertDialogCustom
+        hauntRollButton.isClickable = true
+        hauntRollButton.imageTintList = getColorStateList(R.color.image_button_primary)
         setAllButtonColors(getColor(R.color.colorPrimary), R.color.button_primary)
         setSwitchColor(R.color.switch_primary);
 
@@ -288,9 +290,9 @@ class MainActivity : AppCompatActivity() {
      * Changes app style for haunt
      */
     private fun styleHaunt() {
-        hide(hauntRollButton)
         hide(hauntRollTextButton)
-        hide(omenCardCountTextView)
+        hauntRollButton.isClickable = false
+        hauntRollButton.imageTintList = getColorStateList(R.color.image_button_disabled)
         hide(settingsButton)
 
         alertDialogTheme = R.style.MaterialAlertDialogHaunt

@@ -207,11 +207,12 @@ class MainViewModel : ViewModel() {
             sum += num
             builder.append(num).append(" ")
         }
+        val diceValues = builder.trimEnd().toString()
 
         when (rollType) {
-            RollType.ROLL -> _rollDiceValues.value = builder.toString()
-            RollType.ATTACK -> _attackDiceValues.value = builder.toString()
-            RollType.HAUNT -> _hauntRollDiceValues.value = builder.toString()
+            RollType.ROLL -> _rollDiceValues.value = diceValues
+            RollType.ATTACK -> _attackDiceValues.value = diceValues
+            RollType.HAUNT -> _hauntRollDiceValues.value = diceValues
         }
 
         return sum
